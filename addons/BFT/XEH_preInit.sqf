@@ -1,7 +1,6 @@
 #include "script_component.hpp"
 #include "XEH_PREP.hpp"
 
-
 // Group markers 
 [
 	"BFT_groupMarkers_enable", // enabled?

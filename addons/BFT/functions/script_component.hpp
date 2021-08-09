@@ -1,0 +1,1 @@
+#include "\z\tca\addons\bft\script_component.hpp"
