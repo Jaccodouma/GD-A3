@@ -1,7 +1,6 @@
 #include "script_component.hpp"
 #include "XEH_PREP.hpp"
 
-// [] call FUNC(groupMarkers_addSettings);
 
 // Group markers 
 [
@@ -82,7 +81,15 @@
 	"CHECKBOX",
 	"Mark other groups", 
 	"BFT - Player markers",
-	true
+	true, 
+	0, 
+	{
+        params ["_value"];
+		if (_value) then {
+			// Enable markers
+			[] call FUNC(playerMarkers_init);
+		};
+	}
 ] call CBA_fnc_addSetting; 
 
 [

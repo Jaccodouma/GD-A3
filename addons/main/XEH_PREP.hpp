@@ -4,3 +4,5 @@ PREP(groupMarkers_remove);
 
 PREP(groupMarkers_addSettings);
 PREP(groupMarkers_getGroupPosition);
+
+PREP(playerMarkers_init);
