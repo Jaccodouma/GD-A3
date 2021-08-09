@@ -11,10 +11,10 @@
 */
 
 // Add ACE options to map 
-action_Playermarkers_On = ["BFT_PlayerMarkers_On", "Enable unit marker", "BFT\icons\on.paa", {player setVariable ["BFT_playerMarker_visible", true, true]}, {BFT_playerMarkers_ShowToggle && visibleMap && !(player getVariable ["BFT_playerMarker_visible", true])}] call ace_interact_menu_fnc_createAction;
+action_Playermarkers_On = ["BFT_PlayerMarkers_On", "Enable unit marker", getText(configfile >> "TCA_BFT_Icons" >> "on"), {player setVariable ["BFT_playerMarker_visible", true, true]}, {BFT_playerMarkers_ShowToggle && visibleMap && !(player getVariable ["BFT_playerMarker_visible", true])}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions"], action_Playermarkers_On] call ace_interact_menu_fnc_addActionToObject;
 
-action_Playermarkers_Off = ["BFT_PlayerMarkers_Off", "Disable unit marker", "BFT\icons\off.paa", {player setVariable ["BFT_playerMarker_visible", false, true]}, {BFT_playerMarkers_ShowToggle && visibleMap && player getVariable ["BFT_playerMarker_visible", true]}] call ace_interact_menu_fnc_createAction;
+action_Playermarkers_Off = ["BFT_PlayerMarkers_Off", "Disable unit marker", getText(configfile >> "TCA_BFT_Icons" >> "off"), {player setVariable ["BFT_playerMarker_visible", false, true]}, {BFT_playerMarkers_ShowToggle && visibleMap && player getVariable ["BFT_playerMarker_visible", true]}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions"], action_Playermarkers_Off] call ace_interact_menu_fnc_addActionToObject;
 
 // Wait until the map control actually exists, for some reason it doesnt work without this.
