@@ -24,3 +24,40 @@ I use [HEMTT](https://github.com/BrettMayson/HEMTT) to build etc.
 `hemtt build --release` to create a release
 
 `hemtt file-patching` to create link for file patching
+
+For file patching to work with CBA functions you need to add the following to your test mission's description.ext: 
+```ts
+class CfgSettings {
+    class CBA {
+        class Caching {
+            compile = 0;
+            xeh = 0;
+            functions = 0;
+        };
+    };
+};
+
+```
+
+
+## **Todos:**
+- Group markers
+  - Allow custom names 
+  - Show team info when clicking marker
+  - Update the color icons in ACE interact to actually match the 
+  colors. 
+  - Need GPS?
+  - Can be disabled/scrambled within a given area (e.g. they are jammed)
+  - Add the options to 3DEN and Zeus
+  - Have a list mission makers can add to. e.g. show Civ group location. 
+  - Encryption codes for group markers - maybe multiple codes? e.g. cant see where "special forces" are, but "special forces" can see you (I did a little thing here... not sure if works.. or what happens if you give a player the decryption code to an enemy unit?)
+- Player markers
+  - Add setting to zeus to enable/disable their marker. Right now it'll never mark zeus. 
+  - Need GPS?
+- Troop overview
+  - A tab on the map with all teams/units
+- Vehicles
+  - Limit vehicle speed (to match player walk / run speed)
+    The ACE function does not take speed, maybe use onEachFrame EH to poll for speed and lock.
+  - Vehicle damage status easier to see
+  - Can we stabilize the gun when vehicle turning? 
