@@ -7,7 +7,10 @@ class CfgPatches {
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
         requiredAddons[] = {};
-        author = "AUTHOR";
+        author = "Jacco";
         VERSION_CONFIG;
     };
 };
+
+#include "CfgEventHandlers.hpp"
+#include "CfgIcons.hpp"
