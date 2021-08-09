@@ -28,7 +28,7 @@ action_BFT = ["Jacco_BFT", "BFT", "", {true}, {leader group player == player && 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Colors 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-action_BFT_Colors = ["Jacco_BFT_Colors", "Color", getText(configfile >> "GD_BFT_Icons" >> "colorWheel"), {true}, {true}] call ace_interact_menu_fnc_createAction;
+action_BFT_Colors = ["Jacco_BFT_Colors", "Color", getText(configfile >> "TCA_BFT_Icons" >> "colorWheel"), {true}, {true}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Colors] call ace_interact_menu_fnc_addActionToObject;
 
 // Array with available colors and the name they're displayed as
@@ -63,12 +63,12 @@ _markerColors_other = [
 		params ["_target", "_player", "_params"];
 		(group player) setVariable ["BFT_groupMarker_color", _params, true];
 	};
-	_action = [("Jacco_BFT_Colors_"+_name), _name, getText(configfile >> "GD_BFT_Icons" >> "dot" >> _name), _statement, {true}, {}, _color] call ace_interact_menu_fnc_createAction;
+	_action = [("Jacco_BFT_Colors_"+_name), _name, getText(configfile >> "TCA_BFT_Icons" >> "dot" >> _name), _statement, {true}, {}, _color] call ace_interact_menu_fnc_createAction;
 	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors"], _action] call ace_interact_menu_fnc_addActionToObject;
 } forEach _markerColors_side;
 
 // Add other colors
-action_BFT_Colors_Other = ["Jacco_BFT_Colors_Other", "Other colors", getText(configfile >> "GD_BFT_Icons" >> "plus"), {true}, {true}] call ace_interact_menu_fnc_createAction;
+action_BFT_Colors_Other = ["Jacco_BFT_Colors_Other", "Other colors", getText(configfile >> "TCA_BFT_Icons" >> "plus"), {true}, {true}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors"], action_BFT_Colors_Other] call ace_interact_menu_fnc_addActionToObject;
 
 
@@ -81,7 +81,7 @@ action_BFT_Colors_Other = ["Jacco_BFT_Colors_Other", "Other colors", getText(con
 		(group player) setVariable ["BFT_groupMarker_color", _params, true];
 	};
 
-	_action = [("Jacco_BFT_Colors_"+_name), _name, getText(configfile >> "GD_BFT_Icons" >> "dot" >> _name), _statement, {true}, {}, _color] call ace_interact_menu_fnc_createAction;
+	_action = [("Jacco_BFT_Colors_"+_name), _name, getText(configfile >> "TCA_BFT_Icons" >> "dot" >> _name), _statement, {true}, {}, _color] call ace_interact_menu_fnc_createAction;
 	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors", "Jacco_BFT_Colors_Other"], _action] call ace_interact_menu_fnc_addActionToObject;
 } forEach _markerColors_other;
 
@@ -115,13 +115,13 @@ _action_BFT_Name_insertChildren = {
 	_actions
 };
 
-action_BFT_Name = ["Jacco_BFT_Name", "Name", getText(configfile >> "GD_BFT_Icons" >> "pen"), {true}, {true}, _action_BFT_Name_insertChildren] call ace_interact_menu_fnc_createAction;
+action_BFT_Name = ["Jacco_BFT_Name", "Name", getText(configfile >> "TCA_BFT_Icons" >> "pen"), {true}, {true}, _action_BFT_Name_insertChildren] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Name] call ace_interact_menu_fnc_addActionToObject;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Team icon 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-action_BFT_Icon = ["Jacco_BFT_Icons", "Icon", getText(configfile >> "GD_BFT_Icons" >> "BFT"), {true}, {true}] call ace_interact_menu_fnc_createAction;
+action_BFT_Icon = ["Jacco_BFT_Icons", "Icon", getText(configfile >> "TCA_BFT_Icons" >> "BFT"), {true}, {true}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Icon] call ace_interact_menu_fnc_addActionToObject;
 
 _icons = [
@@ -162,7 +162,7 @@ _additionalIcons = [
 	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Icons"], _action] call ace_interact_menu_fnc_addActionToObject;
 } forEach _icons;
 
-action_BFT_Icons_Other = ["Jacco_BFT_Icons_Other", "Other icons", getText(configfile >> "GD_BFT_Icons" >> "plus"), {true}, {true}] call ace_interact_menu_fnc_createAction;
+action_BFT_Icons_Other = ["Jacco_BFT_Icons_Other", "Other icons", getText(configfile >> "TCA_BFT_Icons" >> "plus"), {true}, {true}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Icons"], action_BFT_Icons_Other] call ace_interact_menu_fnc_addActionToObject;
 
 {
@@ -181,8 +181,8 @@ action_BFT_Icons_Other = ["Jacco_BFT_Icons_Other", "Other icons", getText(config
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Enable/Disable team tracker
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-action_BFT_Enable = ["Jacco_BFT_Enable", "Enable tracker", getText(configfile >> "GD_BFT_Icons" >> "on"), {(group player) setVariable ["BFT_groupMarker_visible", true, true]}, {!((group player) getVariable ["BFT_groupMarker_visible", false]);}] call ace_interact_menu_fnc_createAction;
+action_BFT_Enable = ["Jacco_BFT_Enable", "Enable tracker", getText(configfile >> "TCA_BFT_Icons" >> "on"), {(group player) setVariable ["BFT_groupMarker_visible", true, true]}, {!((group player) getVariable ["BFT_groupMarker_visible", false]);}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Enable] call ace_interact_menu_fnc_addActionToObject;
 
-action_BFT_Disable = ["Jacco_BFT_Disable", "Disable tracker", getText(configfile >> "GD_BFT_Icons" >> "off"), {(group player) setVariable ["BFT_groupMarker_visible", false, true]}, {((group player) getVariable ["BFT_groupMarker_visible", false]);}] call ace_interact_menu_fnc_createAction;
+action_BFT_Disable = ["Jacco_BFT_Disable", "Disable tracker", getText(configfile >> "TCA_BFT_Icons" >> "off"), {(group player) setVariable ["BFT_groupMarker_visible", false, true]}, {((group player) getVariable ["BFT_groupMarker_visible", false]);}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Disable] call ace_interact_menu_fnc_addActionToObject;

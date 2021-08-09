@@ -1,4 +1,4 @@
-# **GD Mod - BFT and more!**
+# **Team Collaboration Aides - BFT and more!**
 Some scripts to keep track of your teams. Requires DUI and ACE3.
 
 ## **For mission makers**

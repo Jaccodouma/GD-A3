@@ -1,3 +1,3 @@
-name = "GD - BFT and more";
-dir = "@gd";
-author = "Jacco";
+name = "Team Collaboration Aides";
+dir = "@TCA";
+author = "Jacco & Hightower";

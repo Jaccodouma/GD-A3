@@ -1,4 +1,4 @@
-class GD_BFT_Icons
+class TCA_BFT_Icons
 {
 	BFT = QPATHTO_T(UI\icons\BFT.paa);
 	colorWheel = QPATHTO_T(UI\icons\colorWheel.paa);

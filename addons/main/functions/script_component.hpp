@@ -1,1 +1,1 @@
-#include "\z\gd\addons\main\script_component.hpp"
+#include "\z\tca\addons\main\script_component.hpp"

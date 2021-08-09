@@ -1,5 +1,5 @@
 #define MAINPREFIX z
-#define PREFIX GD
+#define PREFIX TCA
 
 #include "script_version.hpp"
 
