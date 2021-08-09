@@ -17,7 +17,7 @@ this setVariable ["BFT_groupMarker_color", "ColorOrange"];
 Player groups will have their marker enabled by default. 
 
 ## **For developers**
-I use HEMTT to build etc.
+I use [HEMTT](https://github.com/BrettMayson/HEMTT) to build etc.
 
 `hemtt build` to build 
 
