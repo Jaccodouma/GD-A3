@@ -43,6 +43,7 @@ class CfgSettings {
 ## **Todos:**
 - Group markers
   - Allow custom names 
+  - Don't allow names that are in use
   - Show team info when clicking marker
   - Update the color icons in ACE interact to actually match the 
   colors. 
