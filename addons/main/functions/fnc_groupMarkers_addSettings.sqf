@@ -68,7 +68,7 @@ _markerColors_other = [
 } forEach _markerColors_side;
 
 // Add other colors
-action_BFT_Colors_Other = ["Jacco_BFT_Colors_Other", "Other colors", "BFT\icons\plus.paa", {true}, {true}] call ace_interact_menu_fnc_createAction;
+action_BFT_Colors_Other = ["Jacco_BFT_Colors_Other", "Other colors", getText(configfile >> "GD_BFT_Icons" >> "plus"), {true}, {true}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors"], action_BFT_Colors_Other] call ace_interact_menu_fnc_addActionToObject;
 
 
