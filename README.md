@@ -45,8 +45,6 @@ class CfgSettings {
   - Allow custom names 
   - Don't allow names that are in use
   - Show team info when clicking marker
-  - Update the color icons in ACE interact to actually match the 
-  colors. 
   - Need GPS?
   - Can be disabled/scrambled within a given area (e.g. they are jammed)
   - Add the options to 3DEN and Zeus
