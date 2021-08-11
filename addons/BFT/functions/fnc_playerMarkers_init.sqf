@@ -17,11 +17,6 @@ action_Playermarkers_On = ["BFT_PlayerMarkers_On", "Enable unit marker", getText
 action_Playermarkers_Off = ["BFT_PlayerMarkers_Off", "Disable unit marker", getText(configfile >> "TCA_BFT_Icons" >> "off"), {player setVariable ["BFT_playerMarker_visible", false, true]}, {BFT_playerMarkers_ShowToggle && visibleMap && player getVariable ["BFT_playerMarker_visible", true]}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions"], action_Playermarkers_Off] call ace_interact_menu_fnc_addActionToObject;
 
-// Wait until the map control actually exists, for some reason it doesnt work without this.
-waitUntil {
-	!isNull (findDisplay 12 displayCtrl 51);
-};
-
 fnc_vehicleIconColor = {
 	params ["_vehicle"];
 
@@ -95,83 +90,90 @@ fnc_getUnitsToBeMarked = {
 	_units
 };
 
-findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
-	params ["_control"];
-	_maxScale = 250; // Max scale for the icons & text
+_fnc_addEH = {
+	findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
+		params ["_control"];
+		_maxScale = 250; // Max scale for the icons & text
 
-	_scale = (10^(abs log (ctrlMapScale _control))) min _maxScale; 
+		_scale = (10^(abs log (ctrlMapScale _control))) min _maxScale; 
 
-	_alpha = [0.03*_scale-0.2, 0, 1] call BIS_fnc_clamp;
+		_alpha = [0.03*_scale-0.2, 0, 1] call BIS_fnc_clamp;
 
-	if (_alpha > 0) then {
-		// Players that have already been marked (when they're in a vehicle with someone else);
-		private _alreadyMarkedPlayers = [];  
-		
-		_textSize = (0.0015 * 0.13) * _scale;
+		if (_alpha > 0) then {
+			// Players that have already been marked (when they're in a vehicle with someone else);
+			private _alreadyMarkedPlayers = [];  
+			
+			_textSize = (0.0015 * 0.13) * _scale;
 
-		{
-			// _x = unit to mark 
-			private ["_icon","_color","_pos","_dir","_text"];
+			{
+				// _x = unit to mark 
+				private ["_icon","_color","_pos","_dir","_text"];
 
-			_markerSize = (1.8 * 0.13) * _scale;
+				_markerSize = (1.8 * 0.13) * _scale;
 
-			// Dont' remark already marked players 
-			if (_x in _alreadyMarkedPlayers) then {continue};
+				// Dont' remark already marked players 
+				if (_x in _alreadyMarkedPlayers) then {continue};
 
-			if !(_x != vehicle _x) then { // Unit is not in vehilce
-				// Basic things 
-				_text = name _x; 
-				_pos = getPos _x; 
-				_dir = getDir _x; 
+				if !(_x != vehicle _x) then { // Unit is not in vehilce
+					// Basic things 
+					_text = name _x; 
+					_pos = getPos _x; 
+					_dir = getDir _x; 
 
-				_icon = _x getVariable ["diwako_dui_radar_compass_icon", [] call fnc_unitIcon];
+					_icon = _x getVariable ["diwako_dui_radar_compass_icon", [] call fnc_unitIcon];
 
-				// Color 
-				_color = [playerSide, false] call BIS_fnc_sideColor;
-				if (player in (units group _x)) then {
-					_color = + (_x getVariable "diwako_dui_main_compass_color"); // + cause otherwise we get locality issues 
-					if (_x getVariable ["ACE_isUnconscious", false]) then {_color = [1, 0.5, 0];};
-				} else {
+					// Color 
 					_color = [playerSide, false] call BIS_fnc_sideColor;
+					if (player in (units group _x)) then {
+						_color = + (_x getVariable "diwako_dui_main_compass_color"); // + cause otherwise we get locality issues 
+						if (_x getVariable ["ACE_isUnconscious", false]) then {_color = [1, 0.5, 0];};
+					} else {
+						_color = [playerSide, false] call BIS_fnc_sideColor;
+					};
+				} else { // Unit is in vehicle
+					// Icon (Get from config)
+					_icon = getText (configfile >> "CfgVehicles" >> typeOf vehicle _x >> "icon");
+
+					// Color (Color if all the same team, otherwise white) (Still to do, lazy atm)
+					_color = [vehicle _x] call fnc_vehicleIconColor;
+
+					// Position 
+					_pos = getPos vehicle _x; 
+					_dir = getDir vehicle _x; 
+
+					// Text
+					_text = [vehicle _x] call fnc_vehicleText;
+
+					// Increase marker size;
+					_markerSize = _markerSize * 2.5; 
+
+					// Add all units in vehicle to _alreadyMarkedPlayers
+					_alreadyMarkedPlayers append (crew vehicle _x); 
 				};
-			} else { // Unit is in vehicle
-				// Icon (Get from config)
-				_icon = getText (configfile >> "CfgVehicles" >> typeOf vehicle _x >> "icon");
 
-				// Color (Color if all the same team, otherwise white) (Still to do, lazy atm)
-				_color = [vehicle _x] call fnc_vehicleIconColor;
+				// Set alpha
+				_color set [3, _alpha];
 
-				// Position 
-				_pos = getPos vehicle _x; 
-				_dir = getDir vehicle _x; 
+				// Draw icon
+				_this select 0 drawIcon [
+					_icon,
+					_color,
+					_pos,
+					_markerSize,
+					_markerSize,
+					_dir,
+					_text,
+					1,
+					_textSize,
+					diwako_dui_font,
+					"right"
+				];
+			} forEach ([] call fnc_getUnitsToBeMarked);
+		};
+	}];
+};
 
-				// Text
-				_text = [vehicle _x] call fnc_vehicleText;
-
-				// Increase marker size;
-				_markerSize = _markerSize * 2.5; 
-
-				// Add all units in vehicle to _alreadyMarkedPlayers
-				_alreadyMarkedPlayers append (crew vehicle _x); 
-			};
-
-			// Set alpha
-			_color set [3, _alpha];
-
-			// Draw icon
-			_this select 0 drawIcon [
-				_icon,
-				_color,
-				_pos,
-				_markerSize,
-				_markerSize,
-				_dir,
-				_text,
-				1,
-				_textSize,
-				diwako_dui_font,
-				"right"
-			];
-		} forEach ([] call fnc_getUnitsToBeMarked);
-	};
-}];
+[
+	{!isNull (findDisplay 12 displayCtrl 51)}, 
+	_fnc_addEH
+] call CBA_fnc_waitUntilAndExecute; 
