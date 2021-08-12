@@ -56,6 +56,7 @@ class CfgSettings {
 - Player markers
   - Add setting to zeus to enable/disable their marker. Right now it'll never mark zeus. 
   - Need GPS?
+  - Change show hide marker thingy to have options "Off, Zeus only, On".
 
 - Troop overview
   - A tab on the map with all teams/units
