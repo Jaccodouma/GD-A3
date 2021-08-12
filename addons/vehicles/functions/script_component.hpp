@@ -1,0 +1,1 @@
+#include "\z\tca\addons\vehicles\script_component.hpp"
