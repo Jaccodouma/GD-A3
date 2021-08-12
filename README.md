@@ -50,11 +50,16 @@ class CfgSettings {
   - Add the options to 3DEN and Zeus
   - Have a list mission makers can add to. e.g. show Civ group location. 
   - Encryption codes for group markers - maybe multiple codes? e.g. cant see where "special forces" are, but "special forces" can see you (I did a little thing here... not sure if works.. or what happens if you give a player the decryption code to an enemy unit?)
+  - Add quick function for mission makers to set group vars
+  - Add ability to disable BFT for groups (for mission makers). 
+
 - Player markers
   - Add setting to zeus to enable/disable their marker. Right now it'll never mark zeus. 
   - Need GPS?
+
 - Troop overview
   - A tab on the map with all teams/units
+
 - Vehicles
   - Limit vehicle speed (to match player walk / run speed)
     The ACE function does not take speed, maybe use onEachFrame EH to poll for speed and lock.

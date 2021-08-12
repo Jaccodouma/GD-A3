@@ -2,7 +2,7 @@
 	class ACE_SelfActions { \
 		class GVAR(SpeedLimiterActions) { \
 			displayName = "Speed limiter"; \
-			condition = "_player == driver _target"; \
+			condition = "_player == driver _target && tca_vehicles_showSpeedLimiterOptions"; \
 			statement = ""; \
 			insertChildren = QUOTE(call DFUNC(addSpeedLimiterActions)); \
 		}; \
