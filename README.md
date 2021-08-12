@@ -19,11 +19,11 @@ Player groups will have their marker enabled by default.
 ## **For developers**
 I use [HEMTT](https://github.com/BrettMayson/HEMTT) to build etc.
 
-`hemtt build` to build 
+`hemtt.exe build` to build 
 
-`hemtt build --release` to create a release
+`hemtt.exe build --release` to create a release
 
-`hemtt file-patching` to create link for file patching
+`hemtt.exe file-patching` to create link for file patching
 
 For file patching to work with CBA functions you need to add the following to your test mission's description.ext: 
 ```ts
