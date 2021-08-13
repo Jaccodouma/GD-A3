@@ -62,6 +62,15 @@ GVAR(availableMarkerColors) = [
 
 // Position
 [
+	QGVAR(groupMarkers_markerShape),
+	"LIST",
+	["Marker shape", "Warning! Taking this off automatic will also affect enemy groups."], 
+	"[TCA] BFT - Group markers",
+	[["a", "b", "o", "n"], ["Automatic", "Blufor", "Opfor", "Independent"],0]
+] call CBA_fnc_addSetting; 
+
+// Position
+[
 	QGVAR(groupMarkers_trackingMode),
 	"LIST",
 	["Tracking mode", "The way a group's position is calculated"], 

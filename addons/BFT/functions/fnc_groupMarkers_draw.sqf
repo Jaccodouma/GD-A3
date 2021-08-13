@@ -13,9 +13,11 @@
 	_markerColor = _x getVariable ["BFT_groupMarker_color", [playerSide, true] call BIS_fnc_sideColor];
 
 	// Side, default to BLUFOR
-	private _markerSide = "b"; 
-	if (playerSide == opfor) then {_markerSide = "o"};
-	if (playerSide == independent) then {_markerSide = "n"};
+	// private _markerSide = "b"; 
+	// if (playerSide == opfor) then {_markerSide = "o"};
+	// if (playerSide == independent) then {_markerSide = "n"};
+
+	_markerSide = [_x] call FUNC(getGroupMarkerShape);
 
 	// Create marker
 	_marker = createMarkerLocal [groupId _x, _markerPos];
