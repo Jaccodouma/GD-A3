@@ -19,11 +19,11 @@ Player groups will have their marker enabled by default.
 ## **For developers**
 I use [HEMTT](https://github.com/BrettMayson/HEMTT) to build etc.
 
-`hemtt.exe build` to build 
+`./hemtt.exe build` to build 
 
-`hemtt.exe build --release` to create a release
+`./hemtt.exe build --release` to create a release
 
-`hemtt.exe file-patching` to create link for file patching
+`./hemtt.exe file-patching` to create link for file patching
 
 For file patching to work with CBA functions you need to add the following to your test mission's description.ext: 
 ```ts
@@ -50,7 +50,9 @@ class CfgSettings {
   - Have a list mission makers can add to. e.g. show Civ group location. 
   - Encryption codes for group markers - maybe multiple codes? e.g. cant see where "special forces" are, but "special forces" can see you (I did a little thing here... not sure if works.. or what happens if you give a player the decryption code to an enemy unit?)
   - Add quick function for mission makers to set group vars
-  - Add ability to disable BFT for groups (for mission makers). 
+  - Add ability to disable BFT for groups (for mission makers). (Implement HT's networks idea)
+  - Add setting for "Preferred icons". 
+  - Add setting for "Preferred colours", and maybe get the rest from config? 
 
 - Player markers
   - Add setting to zeus to enable/disable their marker. Right now it'll never mark zeus. 
