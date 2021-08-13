@@ -42,20 +42,17 @@ class CfgSettings {
 ## **Todos:**
 - Group markers
   - Allow custom names 
-  - Don't allow names that are in use
   - Show team info when clicking marker
   - Need GPS?
-  - Can be disabled/scrambled within a given area (e.g. they are jammed)
+  - Can be disabled/scrambled within a given area (e.g. they are jammed) (Pitch: "Scramble BFT" module for Zeus & 3DEN)
   - Add the options to 3DEN and Zeus
-  - Have a list mission makers can add to. e.g. show Civ group location. 
-  - Encryption codes for group markers - maybe multiple codes? e.g. cant see where "special forces" are, but "special forces" can see you (I did a little thing here... not sure if works.. or what happens if you give a player the decryption code to an enemy unit?)
   - Add quick function for mission makers to set group vars
   - Add ability to disable BFT for groups (for mission makers). (Implement HT's networks idea)
   - Add setting for "Preferred icons". 
   - Add setting for "Preferred colours", and maybe get the rest from config? 
 
 - Player markers
-  - Add setting to zeus to enable/disable their marker. Right now it'll never mark zeus. 
+  - Clean up (separate functions mainly)
   - Need GPS?
   - Change show hide marker thingy to have options "Off, Zeus only, On".
 
@@ -63,7 +60,5 @@ class CfgSettings {
   - A tab on the map with all teams/units
 
 - Vehicles
-  - Limit vehicle speed (to match player walk / run speed)
-    The ACE function does not take speed, maybe use onEachFrame EH to poll for speed and lock.
   - Vehicle damage status easier to see
   - Can we stabilize the gun when vehicle turning? 
