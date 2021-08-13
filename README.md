@@ -40,7 +40,7 @@ class CfgSettings {
 
 
 ## **Todos:**
-- Group markers
+- Group markers (BFT)
   - Allow custom names 
   - Show team info when clicking marker
   - Need GPS?
@@ -51,12 +51,12 @@ class CfgSettings {
   - Add setting for "Preferred icons". 
   - Add setting for "Preferred colours", and maybe get the rest from config? 
 
-- Player markers
+- Player markers (BFT)
   - Clean up (separate functions mainly)
   - Need GPS?
   - Change show hide marker thingy to have options "Off, Zeus only, On".
 
-- Troop overview
+- Troop overview (BFT)
   - A tab on the map with all teams/units
 
 - Vehicles
