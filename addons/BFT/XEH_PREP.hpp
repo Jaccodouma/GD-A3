@@ -9,3 +9,4 @@ PREP(unitMarkers_init);
 
 PREP(groupMarkers_settings_insertIconsChildren);
 PREP(groupMarkers_settings_insertColorsChildren);
+PREP(groupMarkers_settings_insertNameChildren);

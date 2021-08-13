@@ -57,40 +57,47 @@ _action_BFT_Colors_Other = [
 // Team name
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Dynamically add children for group names
-_action_BFT_Name_insertChildren = {
-    params ["_target", "_player", "_params"];
+// _action_BFT_Name_insertChildren = {
+//     params ["_target", "_player", "_params"];
 
-	private _actions = []; 
-	{
-		_statement = {
-			params ["_target", "_player", "_params"];
-			(group player) setGroupIdGlobal [_params];
-		};
+// 	private _actions = []; 
+// 	{
+// 		_statement = {
+// 			params ["_target", "_player", "_params"];
+// 			(group player) setGroupIdGlobal [_params];
+// 		};
 
-		_icon = getText(configfile >> "TCA_BFT_Interact_Icons" >> "letter" >> toUpper _x select [0,1]);
+// 		_icon = getText(configfile >> "TCA_BFT_Interact_Icons" >> "letter" >> toUpper _x select [0,1]);
     	
-		// Get icon colour in CfgMarkerColors, convert to RGB array, then convert to HTML string
-		_iconColour = group player getVariable ["BFT_groupMarker_color", [playerSide, true] call BIS_fnc_sideColor];
-		_iconColour = (getArray (configfile >> "CfgMarkerColors" >> _iconColour >> "color")) call BIS_fnc_colorConfigToRGBA;
-		_iconColour = _iconColour call BIS_fnc_colorRGBtoHTML;
+// 		// Get icon colour in CfgMarkerColors, convert to RGB array, then convert to HTML string
+// 		_iconColour = group player getVariable ["BFT_groupMarker_color", [playerSide, true] call BIS_fnc_sideColor];
+// 		_iconColour = (getArray (configfile >> "CfgMarkerColors" >> _iconColour >> "color")) call BIS_fnc_colorConfigToRGBA;
+// 		_iconColour = _iconColour call BIS_fnc_colorRGBtoHTML;
 
-		_action = [
-			format ["Jacco_BFT_Names_%1", _x],
-			_x, 
-			[_icon, _iconColour], 
-			_statement, 
-			{true}, 
-			{}, 
-			_x
-		] call ace_interact_menu_fnc_createAction;
-		_actions pushBack [_action, [], _target];
-	} forEach ([GVAR(groupMarkers_nameOptions)] call EFUNC(main,stringToTrimmedArray));
+// 		_action = [
+// 			format ["Jacco_BFT_Names_%1", _x],
+// 			_x, 
+// 			[_icon, _iconColour], 
+// 			_statement, 
+// 			{true}, 
+// 			{}, 
+// 			_x
+// 		] call ace_interact_menu_fnc_createAction;
+// 		_actions pushBack [_action, [], _target];
+// 	} forEach ([GVAR(groupMarkers_nameOptions)] call EFUNC(main,stringToTrimmedArray));
 
-	// Return created actions
-	_actions
-};
+// 	// Return created actions
+// 	_actions
+// };
 
-_action_BFT_Name = ["Jacco_BFT_Name", "Name", getText(configfile >> "TCA_BFT_Interact_Icons" >> "pen"), {true}, {true}, _action_BFT_Name_insertChildren] call ace_interact_menu_fnc_createAction;
+_action_BFT_Name = [
+	"Jacco_BFT_Name", "Name", 
+	getText(configfile >> "TCA_BFT_Interact_Icons" >> "pen"), 
+	{true},
+	{true}, 
+	FUNC(groupMarkers_settings_insertNameChildren)
+] call ace_interact_menu_fnc_createAction;
+
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], _action_BFT_Name] call ace_interact_menu_fnc_addActionToObject;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
