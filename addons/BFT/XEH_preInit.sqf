@@ -108,7 +108,7 @@ GVAR(availableMarkerColors) = [
 	"EDITBOX",
 	["Group Name Options", "Names available in ACE BFT Settings, separated by comma."],
 	["[TCA] BFT - Group markers", "Map settings"],
-	["Zulu,Lima,Uniform,Echo,Whisky,Tango"]
+	["Zulu,Lima,Uniform,Echo,Whiskey,Tango"]
 ] call CBA_fnc_addSetting;
 
 [
