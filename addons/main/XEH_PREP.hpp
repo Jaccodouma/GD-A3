@@ -1,1 +1,2 @@
 PREP(stringToTrimmedArray);
+PREP(stringToTrimmedArrayUpper);

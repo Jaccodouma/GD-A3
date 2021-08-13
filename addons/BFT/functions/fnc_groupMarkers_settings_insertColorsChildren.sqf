@@ -8,8 +8,8 @@ _params params [["_showPreferred", false, [true]]];
 _actions = [];
 
 {
-	_isBlacklisted = _x in (GVAR(groupMarkers_colorsBlacklist) call EFUNC(main,stringToTrimmedArray));
-	_isPreferred = _x in (GVAR(groupMarkers_preferredColors) call EFUNC(main,stringToTrimmedArray));
+	_isBlacklisted = _x in (GVAR(groupMarkers_colorsBlacklist) call EFUNC(main,stringToTrimmedArrayUpper));
+	_isPreferred = _x in (GVAR(groupMarkers_preferredColors) call EFUNC(main,stringToTrimmedArrayUpper));
 
 	if (_isBlacklisted) then {continue;};
 

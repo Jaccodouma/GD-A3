@@ -24,24 +24,10 @@ GVAR(availableMarkerIcons) = [
 	"unknown"
 ];
 
-GVAR(availableMarkerColors) = [
-	"ColorBLUFOR",
-	"ColorOPFOR",
-	"ColorIndependent",
-	"ColorCivilian",
-	"ColorUNKNOWN",
-	"ColorRed",
-	"ColorOrange",
-	"ColorYellow",
-	"ColorGreen",
-	"ColorKhaki",
-	"ColorBlue",
-	"ColorPink",
-	"ColorBrown",
-	"ColorGrey",
-	"ColorBlack",
-	"ColorWhite"
-];
+GVAR(availableMarkerColors) = [ 
+  "true" configClasses (configfile >> "CfgMarkerColors"),  
+  {toUpper configName _x} 
+] call CBA_fnc_filter;
 
 /*
   ██████ ██████  ██████ ██    ████████     ███    ███ █████ ██████ ██   ███████████████ ███████    
@@ -154,7 +140,7 @@ GVAR(availableMarkerColors) = [
 	"EDITBOX",
 	"Colors blacklist",
 	["[TCA] BFT - Group markers", "Map settings"],
-	[""]
+	["Default, ColorWEST, ColorEAST, ColorGUER, ColorCIV, Color1_FD_F, Color2_FD_F, Color3_FD_F, Color4_FD_F, Color5_FD_F, Color6_FD_F"]
 ] call CBA_fnc_addSetting;
 
 /*
