@@ -64,3 +64,4 @@ class CfgSettings {
 - Vehicles
   - Vehicle damage status easier to see
   - Can we stabilize the gun when vehicle turning? 
+  - Keybinds for speed limiter (Try to use the ACE keybind maybe? Default is del, so ctrl+del = nearest speed lower than current, shift+del nearest speed higher than current)
