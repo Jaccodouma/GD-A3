@@ -9,13 +9,25 @@
 	Returns: 
 	nothing
 */
+#include "script_component.hpp"
 
 // Add ACE options to map 
-action_Playermarkers_On = ["BFT_PlayerMarkers_On", "Enable unit marker", getText(configfile >> "TCA_BFT_Icons" >> "on"), {player setVariable ["BFT_playerMarker_visible", true, true]}, {BFT_playerMarkers_ShowToggle && visibleMap && !(player getVariable ["BFT_playerMarker_visible", true])}] call ace_interact_menu_fnc_createAction;
-[player, 1, ["ACE_SelfActions"], action_Playermarkers_On] call ace_interact_menu_fnc_addActionToObject;
+action_unitMarkers_On = 
+	[
+		"BFT_unitMarkers_On", 
+		"Enable unit marker", 
+		getText(configfile >> "TCA_BFT_Icons" >> "on"), 
+		{player setVariable ["BFT_playerMarker_visible", true, true]}, 
+		{
+			GVAR(unitMarkers_showToggle) && 
+			visibleMap && 
+			!(player getVariable ["BFT_playerMarker_visible", true])
+		}
+	] call ace_interact_menu_fnc_createAction;
+[player, 1, ["ACE_SelfActions"], action_unitMarkers_On] call ace_interact_menu_fnc_addActionToObject;
 
-action_Playermarkers_Off = ["BFT_PlayerMarkers_Off", "Disable unit marker", getText(configfile >> "TCA_BFT_Icons" >> "off"), {player setVariable ["BFT_playerMarker_visible", false, true]}, {BFT_playerMarkers_ShowToggle && visibleMap && player getVariable ["BFT_playerMarker_visible", true]}] call ace_interact_menu_fnc_createAction;
-[player, 1, ["ACE_SelfActions"], action_Playermarkers_Off] call ace_interact_menu_fnc_addActionToObject;
+action_unitMarkers_Off = ["BFT_unitMarkers_Off", "Disable unit marker", getText(configfile >> "TCA_BFT_Icons" >> "off"), {player setVariable ["BFT_playerMarker_visible", false, true]}, {GVAR(unitMarkers_showToggle) && visibleMap && player getVariable ["BFT_playerMarker_visible", true]}] call ace_interact_menu_fnc_createAction;
+[player, 1, ["ACE_SelfActions"], action_unitMarkers_Off] call ace_interact_menu_fnc_addActionToObject;
 
 fnc_vehicleIconColor = {
 	params ["_vehicle"];
@@ -68,20 +80,20 @@ fnc_getUnitsToBeMarked = {
 	_units = []; 
 
 	// Return empty if turned off  
-	if !(BFT_playerMarkers_enable) exitWith {[]};
+	if !(GVAR(unitMarkers_enabled)) exitWith {[]};
 
-	if (BFT_playerMarkers_otherGroups) then {
+	if (GVAR(unitMarkers_otherGroups)) then {
 		// Mark other groups
 		{
 			if (side group _x != side player) then {continue;};
-			if ((isPlayer _x || BFT_playerMarkers_AI) && _x getVariable ["BFT_playerMarker_visible", true]) then {
+			if ((isPlayer _x || GVAR(unitMarkers_markAI)) && _x getVariable ["BFT_playerMarker_visible", true]) then {
 				_units pushBack _x; 
 			};
 		} forEach allUnits;
 	} else {
 		// Only mark own group
 		{
-			if ((isPlayer _x || BFT_playerMarkers_AI) && _x getVariable ["BFT_playerMarker_visible", true]) then {
+			if ((isPlayer _x || GVAR(unitMarkers_markAI)) && _x getVariable ["BFT_playerMarker_visible", true]) then {
 				_units pushBack _x; 
 			};
 		} forEach units group player;

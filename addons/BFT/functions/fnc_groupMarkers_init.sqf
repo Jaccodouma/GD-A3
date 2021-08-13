@@ -16,14 +16,14 @@ fnc_loop = {
 	[] call FUNC(groupMarkers_remove);
 
 	// Leave loop after removing markers
-	if !(BFT_groupMarkers_enable) exitWith {};
+	if !(GVAR(groupMarkers_enabled)) exitWith {};
 
 	// Create new markers 
 	[] call FUNC(groupMarkers_draw);
 
-	private _sleepTime = BFT_groupMarkers_updateDelay;
+	private _sleepTime = GVAR(groupMarkers_updateDelay);
 	if (isMultiplayer) then {
-		_sleepTime = round BFT_groupMarkers_updateDelay - (serverTime % round BFT_groupMarkers_updateDelay);
+		_sleepTime = round GVAR(groupMarkers_updateDelay) - (serverTime % round GVAR(groupMarkers_updateDelay));
 	};
 
 	[fnc_loop, [], _sleepTime] call CBA_fnc_waitAndExecute;

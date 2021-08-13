@@ -33,7 +33,7 @@ fnc_weightedAverage = {
 _position = position leader _group; 
 
 // Get current position 
-switch (BFT_groupMarkers_trackingMode) do 
+switch (GVAR(groupMarkers_trackingMode)) do 
 {
 	case "weightedAverage": {
 		_position = [_group] call fnc_weightedAverage;
@@ -43,11 +43,11 @@ switch (BFT_groupMarkers_trackingMode) do
 // Add current position to group variable 
 _positions = _group getVariable ["BFT_Trail_Positions", []];
 _positions = [_position] + _positions; // Add to the front of the array 
-_positions = _positions select [0, round BFT_groupMarkers_trailing_count]; // Limit the size to trailing weight. 
+_positions = _positions select [0, round GVAR(groupMarkers_trailingCount)]; // Limit the size to trailing weight. 
 _group setVariable ["BFT_Trail_Positions", _positions]; // Update variable
 
 // Calculate new position if we're trailing 
-switch (BFT_groupMarkers_trailing) do {
+switch (GVAR(groupMarkers_trailingMode)) do {
 	case "weightedAverage": {
 		// Calculate new position 
 		_weight = 1; 
@@ -56,7 +56,7 @@ switch (BFT_groupMarkers_trailing) do {
 		{
 			// Skip the first one
 			if (_forEachIndex == 0) then {continue;};
-			_weight = _weight * BFT_groupMarkers_trailing_weight;
+			_weight = _weight * GVAR(groupMarkers_trailingWeight);
 
 			_position = [
 				(((_position select 0) * _totalWeight) + ((_x select 0) * _weight)) / (_totalWeight + _weight),
@@ -81,8 +81,8 @@ switch (BFT_groupMarkers_trailing) do {
 				(_pos2 select 1) - (_position select 1)
 			];
 		};
-		_dx = (round BFT_groupMarkers_updateDelay) * (_velocity select 0) /* * (BFT_groupMarkers_trailing_count - 1)*/;
-		_dy = (round BFT_groupMarkers_updateDelay) * (_velocity select 1) /* * (BFT_groupMarkers_trailing_count - 1)*/;
+		_dx = (round GVAR(groupMarkers_updateDelay)) * (_velocity select 0) /* * (GVAR(groupMarkers_trailingCount) - 1)*/;
+		_dy = (round GVAR(groupMarkers_updateDelay)) * (_velocity select 1) /* * (GVAR(groupMarkers_trailingCount) - 1)*/;
 
 		_position = [
 			(_position select 0) + _dx,

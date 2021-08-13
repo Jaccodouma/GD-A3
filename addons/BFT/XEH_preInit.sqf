@@ -3,7 +3,7 @@
 
 // Group markers 
 [
-	"BFT_groupMarkers_enable", // enabled?
+	QGVAR(groupMarkers_enabled), // enabled?
 	"CHECKBOX",
 	"Enable group markers", 
 	"[TCA] BFT - Group markers",
@@ -19,7 +19,7 @@
 ] call CBA_fnc_addSetting; 
 
 [
-	"BFT_groupMarkers_updateDelay",
+	QGVAR(groupMarkers_updateDelay),
 	"SLIDER",
 	["Update delay", "Delay between group marker updates."], 
 	"[TCA] BFT - Group markers",
@@ -27,7 +27,7 @@
 ] call CBA_fnc_addSetting; 
 
 [
-	"BFT_groupMarkers_nameOptions",
+	QGVAR(groupMarkers_nameOptions),
 	"EDITBOX",
 	["Group Name Options", "Names available in ACE BFT Settings, separated by comma."], 
 	"[TCA] BFT - Group markers",
@@ -35,7 +35,7 @@
 ] call CBA_fnc_addSetting; // maybe a server setting?
 
 [
-	"BFT_groupMarkers_trackingMode",
+	QGVAR(groupMarkers_trackingMode),
 	"LIST",
 	["Tracking mode", "The way a group's position is calculated"], 
 	["[TCA] BFT - Group markers", "Position"],
@@ -43,7 +43,7 @@
 ] call CBA_fnc_addSetting; 
 
 [
-	"BFT_groupMarkers_trailing",
+	QGVAR(groupMarkers_trailingMode),
 	"LIST",
 	["Trailing mode", "Lets a group's position trail behind its actual position."], 
 	["[TCA] BFT - Group markers", "Position"],
@@ -51,7 +51,7 @@
 ] call CBA_fnc_addSetting; 
 
 [
-	"BFT_groupMarkers_trailing_count",
+	QGVAR(groupMarkers_trailingCount),
 	"SLIDER",
 	["Trailing count", "Amount of recent positions considered."], 
 	["[TCA] BFT - Group markers", "Position"],
@@ -59,7 +59,7 @@
 ] call CBA_fnc_addSetting; 
 
 [
-	"BFT_groupMarkers_trailing_weight",
+	QGVAR(groupMarkers_trailingWeight),
 	"SLIDER",
 	["Trailing weight", "Factor with which the weight decreases with per position."], 
 	["[TCA] BFT - Group markers", "Position"],
@@ -68,41 +68,41 @@
 
 // Player markers 
 [
-	"BFT_playerMarkers_enable", 
+	QGVAR(unitMarkers_enabled), 
 	"CHECKBOX",
-	"Enable player markers", 
-	"[TCA] BFT - Player markers",
+	"Enable unit markers", 
+	"[TCA] BFT - Unit markers",
 	true // Default is true
 ] call CBA_fnc_addSetting; 
 
 [
-	"BFT_playerMarkers_otherGroups",
+	QGVAR(unitMarkers_otherGroups),
 	"CHECKBOX",
-	"Mark other groups", 
-	"[TCA] BFT - Player markers",
+	"Mark other groups' units", 
+	"[TCA] BFT - Unit markers",
 	true, 
 	0, 
 	{
         params ["_value"];
 		if (_value) then {
 			// Enable markers
-			[] call FUNC(playerMarkers_init);
+			[] call FUNC(unitMarkers_init);
 		};
 	}
 ] call CBA_fnc_addSetting; 
 
 [
-	"BFT_playerMarkers_AI",
+	QGVAR(unitMarkers_markAI),
 	"CHECKBOX",
-	"Mark AI", 
-	"[TCA] BFT - Player markers",
+	"Mark AI Units", 
+	"[TCA] BFT - Unit markers",
 	true
 ] call CBA_fnc_addSetting; 
 
 [
-	"BFT_playerMarkers_ShowToggle",
+	QGVAR(unitMarkers_showToggle),
 	"CHECKBOX",
 	"Show unit marker toggle ", 
-	"[TCA] BFT - Player markers",
+	"[TCA] BFT - Unit markers",
 	false
 ] call CBA_fnc_addSetting; 

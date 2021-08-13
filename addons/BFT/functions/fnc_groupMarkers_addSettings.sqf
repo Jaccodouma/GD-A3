@@ -109,7 +109,7 @@ _action_BFT_Name_insertChildren = {
 			_x
 		] call ace_interact_menu_fnc_createAction;
 		_actions pushBack [_action, [], _target];
-	} forEach (BFT_groupMarkers_nameOptions splitString ",");
+	} forEach (GVAR(groupMarkers_nameOptions) splitString ",");
 
 	// Return created actions
 	_actions
