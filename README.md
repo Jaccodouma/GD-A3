@@ -48,10 +48,6 @@ class CfgSettings {
   - Add the options to 3DEN and Zeus
   - Add quick function for mission makers to set group vars
   - Add ability to disable BFT for groups (for mission makers). (Implement HT's networks idea)
-  - Add setting for "Preferred icons". 
-  - Add "Icon blacklist" to disable certain icons. 
-  - Add setting for "Preferred colours", and maybe get the rest from config? 
-  - Add "Colour blacklist" to disable certain colours. 
 
 - Player markers (BFT)
   - Clean up (separate functions mainly)
