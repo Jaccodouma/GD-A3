@@ -44,7 +44,15 @@ _actions = [];
     _iconColour = _iconColour call BIS_fnc_colorRGBtoHTML;
 
 	_actions pushBack [
-		[("Jacco_BFT_Icons_"+_icon), _name, [_interactIcon, _iconColour], _statement, {true}, {}, _icon] call ace_interact_menu_fnc_createAction, 
+		[
+			("Jacco_BFT_Icons_"+_icon),
+			_name, 
+			[_interactIcon, _iconColour],
+			_statement,
+			{true},
+			{},
+			_icon
+		] call ace_interact_menu_fnc_createAction, 
 		[], 
 		_target
 	];

@@ -28,62 +28,30 @@ _action_BFT = ["Jacco_BFT", "BFT", "", {true}, {leader group player == player &&
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Colors 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-action_BFT_Colors = ["Jacco_BFT_Colors", "Color", getText(configfile >> "TCA_BFT_Interact_Icons" >> "colorWheel"), {true}, {true}] call ace_interact_menu_fnc_createAction;
+action_BFT_Colors = [
+	"Jacco_BFT_Colors", 
+	"Color", 
+	getText(configfile >> "TCA_BFT_Interact_Icons" >> "colorWheel"), 
+	{true}, 
+	{true}, // Condition
+	FUNC(groupMarkers_settings_insertColorsChildren), 
+	[true] // Params to pass to insertChildren
+] call ace_interact_menu_fnc_createAction;
+
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Colors] call ace_interact_menu_fnc_addActionToObject;
 
-// Array with available colors and the name they're displayed as
-_markerColors_side = [
-	["ColorBLUFOR", "BLUFOR"],
-	["ColorOPFOR", "OPFOR"],
-	["colorIndependent", "Independent"],
-	["colorCivilian", "Civilian"],
-	["ColorUNKNOWN", "Unknown"]
-];
-
-_markerColors_other = [
-	["ColorRed", "Red"],
-	["ColorOrange", "Orange"],
-	["ColorYellow", "Yellow"],
-	["ColorGreen", "Green"],
-	["ColorKhaki", "Khaki"],
-	["ColorBlue", "Blue"],
-	["ColorPink", "Pink"],
-	["ColorBrown", "Brown"],
-	["ColorGrey", "Grey"],
-	["ColorBlack", "Black"],
-	["ColorWhite", "White"]
-];
-
-// Add side colors
-{
-	_color = _x select 0; 
-	_name = _x select 1; 
-
-	_statement = {
-		params ["_target", "_player", "_params"];
-		(group player) setVariable ["BFT_groupMarker_color", _params, true];
-	};
-	_action = [("Jacco_BFT_Colors_"+_name), _name, getText(configfile >> "TCA_BFT_Interact_Icons" >> "dot" >> _name), _statement, {true}, {}, _color] call ace_interact_menu_fnc_createAction;
-	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors"], _action] call ace_interact_menu_fnc_addActionToObject;
-} forEach _markerColors_side;
-
 // Add other colors
-_action_BFT_Colors_Other = ["Jacco_BFT_Colors_Other", "Other colors", getText(configfile >> "TCA_BFT_Interact_Icons" >> "plus"), {true}, {true}] call ace_interact_menu_fnc_createAction;
+_action_BFT_Colors_Other = [
+	"Jacco_BFT_Colors_Other", 
+	"Other colors", 
+	getText(configfile >> "TCA_BFT_Interact_Icons" >> "plus"), 
+	{true}, 
+	{true}, // Condition
+	FUNC(groupMarkers_settings_insertColorsChildren)
+] call ace_interact_menu_fnc_createAction;
+
 [player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors"], _action_BFT_Colors_Other] call ace_interact_menu_fnc_addActionToObject;
 
-
-{
-	_color = _x select 0; 
-	_name = _x select 1; 
-
-	_statement = {
-		params ["_target", "_player", "_params"];
-		(group player) setVariable ["BFT_groupMarker_color", _params, true];
-	};
-
-	_action = [("Jacco_BFT_Colors_"+_name), _name, getText(configfile >> "TCA_BFT_Interact_Icons" >> "dot" >> _name), _statement, {true}, {}, _color] call ace_interact_menu_fnc_createAction;
-	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors", "Jacco_BFT_Colors_Other"], _action] call ace_interact_menu_fnc_addActionToObject;
-} forEach _markerColors_other;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Team name

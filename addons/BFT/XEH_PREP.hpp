@@ -8,3 +8,4 @@ PREP(groupMarkers_getGroupPosition);
 PREP(unitMarkers_init);
 
 PREP(groupMarkers_settings_insertIconsChildren);
+PREP(groupMarkers_settings_insertColorsChildren);
