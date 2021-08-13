@@ -1,13 +1,12 @@
-class TCA_BFT_Icons
-{
+class TCA_BFT_Interact_Icons {
 	BFT = QPATHTO_T(UI\icons\BFT.paa);
 	colorWheel = QPATHTO_T(UI\icons\colorWheel.paa);
 	on = QPATHTO_T(UI\icons\on.paa);
 	off = QPATHTO_T(UI\icons\off.paa);
 	pen = QPATHTO_T(UI\icons\pen.paa);
 	plus = QPATHTO_T(UI\icons\plus.paa);
-	class dot 
-	{
+
+	class dot {
 		black = QPATHTO_T(UI\icons\dot\black.paa);
 		blue = QPATHTO_T(UI\icons\dot\blue.paa);
 		BLUFOR = QPATHTO_T(UI\icons\dot\BLUFOR.paa);

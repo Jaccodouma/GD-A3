@@ -18,7 +18,7 @@ _actions = [];
 _disableSpeedLimiterAction = [
 	"TCA_SpeedLimiter_Disable",
 	"Disable",
-	getText(configfile >> "TCA_BFT_Icons" >> "off"),
+	getText(configfile >> "TCA_BFT_Interact_Icons" >> "off"),
 	{
 		[player, vehicle player] call ace_vehicles_fnc_speedLimiter;
 	},

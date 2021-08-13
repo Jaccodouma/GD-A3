@@ -1,9 +1,38 @@
 #include "script_component.hpp"
 #include "XEH_PREP.hpp"
 
-// Group markers 
+GVAR(availableMarkerIcons) = [
+	"inf",
+	"motor_inf",
+	"mech_inf",
+	"air",
+	"armor",
+	"recon",
+	"antiair",
+	"art",
+	"hq",
+	"installation",
+	"maint",
+	"med",
+	"mortar",
+	"naval",
+	"ordnance",
+	"plane",
+	"service",
+	"support",
+	"uav",
+	"unknown"
+];
+
+/*
+  ██████ ██████  ██████ ██    ████████     ███    ███ █████ ██████ ██   ███████████████ ███████    
+ ██      ██   ████    ████    ████   ██    ████  ██████   ████   ████  ██ ██     ██   ████         
+ ██   █████████ ██    ████    ████████     ██ ████ ███████████████ █████  █████  ██████ ███████    
+ ██    ████   ████    ████    ████         ██  ██  ████   ████   ████  ██ ██     ██   ██     ██    
+  ██████ ██   ██ ██████  ██████ ██         ██      ████   ████   ████   ███████████   █████████    
+*/
 [
-	QGVAR(groupMarkers_enabled), // enabled?
+	QGVAR(groupMarkers_enabled),
 	"CHECKBOX",
 	"Enable group markers", 
 	"[TCA] BFT - Group markers",
@@ -26,14 +55,7 @@
 	[1, 60, 5, 0]
 ] call CBA_fnc_addSetting; 
 
-[
-	QGVAR(groupMarkers_nameOptions),
-	"EDITBOX",
-	["Group Name Options", "Names available in ACE BFT Settings, separated by comma."], 
-	"[TCA] BFT - Group markers",
-	["Zulu,Lima,Uniform,Echo,Whisky,Tango"]
-] call CBA_fnc_addSetting; // maybe a server setting?
-
+// Position
 [
 	QGVAR(groupMarkers_trackingMode),
 	"LIST",
@@ -66,7 +88,63 @@
 	[0, 1, 0.75, 2]
 ] call CBA_fnc_addSetting; 
 
-// Player markers 
+
+// Map settings
+[
+	QGVAR(groupMarkers_mapSettings_enabled),
+	"CHECKBOX",
+	["Enable map settings menu", "Allows group leaders to change their stuff using ace self interact on the map."],
+	["[TCA] BFT - Group markers", "Map settings"],
+	true
+] call CBA_fnc_addSetting; 
+
+[
+	QGVAR(groupMarkers_nameOptions),
+	"EDITBOX",
+	["Group Name Options", "Names available in ACE BFT Settings, separated by comma."],
+	["[TCA] BFT - Group markers", "Map settings"],
+	["Zulu,Lima,Uniform,Echo,Whisky,Tango"]
+] call CBA_fnc_addSetting;
+
+[
+	QGVAR(groupMarkers_preferredIcons),
+	"EDITBOX",
+	"Preferred icons",
+	["[TCA] BFT - Group markers", "Map settings"],
+	["inf, motor_inf, mech_inf, air, armor, recon"]
+] call CBA_fnc_addSetting;
+
+[
+	QGVAR(groupMarkers_iconsBlacklist),
+	"EDITBOX",
+	"Icons blacklist",
+	["[TCA] BFT - Group markers", "Map settings"],
+	["unknown, uav"]
+] call CBA_fnc_addSetting;
+
+[
+	QGVAR(groupMarkers_preferredColors),
+	"EDITBOX",
+	"Preferred colors",
+	["[TCA] BFT - Group markers", "Map settings"],
+	["ColorBLUFOR, ColorOPFOR, ColorIndependend, ColorCivilian, ColorUNKNOWN"]
+] call CBA_fnc_addSetting;
+
+[
+	QGVAR(groupMarkers_colorsBlacklist),
+	"EDITBOX",
+	"Colors blacklist",
+	["[TCA] BFT - Group markers", "Map settings"],
+	[""]
+] call CBA_fnc_addSetting;
+
+/*
+ ██    █████    ████████████    ███    ███ █████ ██████ ██   ███████████████ ███████ 
+ ██    ██████   ████   ██       ████  ██████   ████   ████  ██ ██     ██   ████      
+ ██    ████ ██  ████   ██       ██ ████ ███████████████ █████  █████  ██████ ███████ 
+ ██    ████  ██ ████   ██       ██  ██  ████   ████   ████  ██ ██     ██   ██     ██ 
+  ██████ ██   ██████   ██       ██      ████   ████   ████   ███████████   █████████ 
+*/
 [
 	QGVAR(unitMarkers_enabled), 
 	"CHECKBOX",

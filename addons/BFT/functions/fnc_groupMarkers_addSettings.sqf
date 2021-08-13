@@ -28,7 +28,7 @@ _action_BFT = ["Jacco_BFT", "BFT", "", {true}, {leader group player == player &&
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Colors 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-action_BFT_Colors = ["Jacco_BFT_Colors", "Color", getText(configfile >> "TCA_BFT_Icons" >> "colorWheel"), {true}, {true}] call ace_interact_menu_fnc_createAction;
+action_BFT_Colors = ["Jacco_BFT_Colors", "Color", getText(configfile >> "TCA_BFT_Interact_Icons" >> "colorWheel"), {true}, {true}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Colors] call ace_interact_menu_fnc_addActionToObject;
 
 // Array with available colors and the name they're displayed as
@@ -63,12 +63,12 @@ _markerColors_other = [
 		params ["_target", "_player", "_params"];
 		(group player) setVariable ["BFT_groupMarker_color", _params, true];
 	};
-	_action = [("Jacco_BFT_Colors_"+_name), _name, getText(configfile >> "TCA_BFT_Icons" >> "dot" >> _name), _statement, {true}, {}, _color] call ace_interact_menu_fnc_createAction;
+	_action = [("Jacco_BFT_Colors_"+_name), _name, getText(configfile >> "TCA_BFT_Interact_Icons" >> "dot" >> _name), _statement, {true}, {}, _color] call ace_interact_menu_fnc_createAction;
 	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors"], _action] call ace_interact_menu_fnc_addActionToObject;
 } forEach _markerColors_side;
 
 // Add other colors
-_action_BFT_Colors_Other = ["Jacco_BFT_Colors_Other", "Other colors", getText(configfile >> "TCA_BFT_Icons" >> "plus"), {true}, {true}] call ace_interact_menu_fnc_createAction;
+_action_BFT_Colors_Other = ["Jacco_BFT_Colors_Other", "Other colors", getText(configfile >> "TCA_BFT_Interact_Icons" >> "plus"), {true}, {true}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors"], _action_BFT_Colors_Other] call ace_interact_menu_fnc_addActionToObject;
 
 
@@ -81,7 +81,7 @@ _action_BFT_Colors_Other = ["Jacco_BFT_Colors_Other", "Other colors", getText(co
 		(group player) setVariable ["BFT_groupMarker_color", _params, true];
 	};
 
-	_action = [("Jacco_BFT_Colors_"+_name), _name, getText(configfile >> "TCA_BFT_Icons" >> "dot" >> _name), _statement, {true}, {}, _color] call ace_interact_menu_fnc_createAction;
+	_action = [("Jacco_BFT_Colors_"+_name), _name, getText(configfile >> "TCA_BFT_Interact_Icons" >> "dot" >> _name), _statement, {true}, {}, _color] call ace_interact_menu_fnc_createAction;
 	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors", "Jacco_BFT_Colors_Other"], _action] call ace_interact_menu_fnc_addActionToObject;
 } forEach _markerColors_other;
 
@@ -115,74 +115,38 @@ _action_BFT_Name_insertChildren = {
 	_actions
 };
 
-_action_BFT_Name = ["Jacco_BFT_Name", "Name", getText(configfile >> "TCA_BFT_Icons" >> "pen"), {true}, {true}, _action_BFT_Name_insertChildren] call ace_interact_menu_fnc_createAction;
+_action_BFT_Name = ["Jacco_BFT_Name", "Name", getText(configfile >> "TCA_BFT_Interact_Icons" >> "pen"), {true}, {true}, _action_BFT_Name_insertChildren] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], _action_BFT_Name] call ace_interact_menu_fnc_addActionToObject;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Team icon 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-_action_BFT_Icon = ["Jacco_BFT_Icons", "Icon", getText(configfile >> "TCA_BFT_Icons" >> "BFT"), {true}, {true}] call ace_interact_menu_fnc_createAction;
+_action_BFT_Icon = [
+	"Jacco_BFT_Icons", "Icon", 
+	getText(configfile >> "TCA_BFT_Interact_Icons" >> "BFT"),
+	{true}, // Statement (breaks if not true for some reason)
+	{true}, // Condition
+	FUNC(groupMarkers_settings_insertIconsChildren), 
+	[true] // Params to pass to insertChildren
+] call ace_interact_menu_fnc_createAction;
+
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], _action_BFT_Icon] call ace_interact_menu_fnc_addActionToObject;
 
-_icons = [
-	["inf", "Infantry"], 
-	["motor_inf", "Motorized Infantry"], 
-	["mech_inf", "Mechanized infantry"], 
-	["air", "Air"], 
-	["armor", "Armor"],
-	["recon", "Recon"]
-];
-_additionalIcons = [
-	["antiair", "Anti-Air"], 
-	["art", "Artillery"], 
-	["hq", "HQ"], 
-	["installation", "Installation"], 
-	["maint", "Maintenance"], 
-	["med", "Medical"], 
-	["mortar", "Mortar"], 
-	["naval", "Naval"], 
-	["ordnance", "Ordinance"], 
-	["plane", "Plane"], 
-	["service", "Service"], 
-	["support", "Support"], 
-	["uav", "UAV"], 
-	["unknown", "Unknown"]
-];
 
-{
-	_icon = _x select 0; 
-	_name = _x select 1; 
-
-	_statement = {
-		params ["_target", "_player", "_params"];
-		(group player) setVariable ["BFT_groupMarker_type", _params, true]; 
-	};
-
-	_action = [("Jacco_BFT_Icons_"+_icon), _name, "", _statement, {true}, {}, _icon] call ace_interact_menu_fnc_createAction;
-	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Icons"], _action] call ace_interact_menu_fnc_addActionToObject;
-} forEach _icons;
-
-_action_BFT_Icons_Other = ["Jacco_BFT_Icons_Other", "Other icons", getText(configfile >> "TCA_BFT_Icons" >> "plus"), {true}, {true}] call ace_interact_menu_fnc_createAction;
+_action_BFT_Icons_Other = [
+	"Jacco_BFT_Icons_Other", "Other icons", 
+	getText(configfile >> "TCA_BFT_Interact_Icons" >> "plus"), 
+	{true}, // Statement (breaks if not true for some reason)
+	{true}, // Condition
+	FUNC(groupMarkers_settings_insertIconsChildren)
+] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Icons"], _action_BFT_Icons_Other] call ace_interact_menu_fnc_addActionToObject;
-
-{
-	_icon = _x select 0; 
-	_name = _x select 1; 
-
-	_statement = {
-		params ["_target", "_player", "_params"];
-		(group player) setVariable ["BFT_groupMarker_type", _params, true]; 
-	};
-
-	_action = [("Jacco_BFT_Icons_"+_icon), _name, "", _statement, {true}, {}, _icon] call ace_interact_menu_fnc_createAction;
-	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Icons", "Jacco_BFT_Icons_Other"], _action] call ace_interact_menu_fnc_addActionToObject;
-} forEach _additionalIcons;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Enable/Disable team tracker
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-_action_BFT_Enable = ["Jacco_BFT_Enable", "Enable tracker", getText(configfile >> "TCA_BFT_Icons" >> "on"), {(group player) setVariable ["BFT_groupMarker_visible", true, true]}, {!((group player) getVariable ["BFT_groupMarker_visible", false]);}] call ace_interact_menu_fnc_createAction;
+_action_BFT_Enable = ["Jacco_BFT_Enable", "Enable tracker", getText(configfile >> "TCA_BFT_Interact_Icons" >> "on"), {(group player) setVariable ["BFT_groupMarker_visible", true, true]}, {!((group player) getVariable ["BFT_groupMarker_visible", false]);}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], _action_BFT_Enable] call ace_interact_menu_fnc_addActionToObject;
 
-_action_BFT_Disable = ["Jacco_BFT_Disable", "Disable tracker", getText(configfile >> "TCA_BFT_Icons" >> "off"), {(group player) setVariable ["BFT_groupMarker_visible", false, true]}, {((group player) getVariable ["BFT_groupMarker_visible", false]);}] call ace_interact_menu_fnc_createAction;
+_action_BFT_Disable = ["Jacco_BFT_Disable", "Disable tracker", getText(configfile >> "TCA_BFT_Interact_Icons" >> "off"), {(group player) setVariable ["BFT_groupMarker_visible", false, true]}, {((group player) getVariable ["BFT_groupMarker_visible", false]);}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], _action_BFT_Disable] call ace_interact_menu_fnc_addActionToObject;
