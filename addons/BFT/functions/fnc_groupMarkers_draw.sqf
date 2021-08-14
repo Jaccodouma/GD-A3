@@ -1,9 +1,27 @@
 #include "script_component.hpp"
 
+_playersGroupDecryptCodes = (group player getVariable ["BFT_groupMarker_decryptCodes", []]) + (group player getVariable ["BFT_groupMarker_encryptCodes", []]);
+
 {
 	if !(_x getVariable ["BFT_groupMarker_visible", false]) then {continue;};
 	if (count units _x <= 0) then {continue;};
-	if (side _x != playerSide) then {continue;};
+
+	if(_x != group player) then {
+		// Dont bother with cryption if is players group!
+		_canSeeOtherGroup = false;
+
+		// todo: replace with arrayIntersect
+		_targetGroupsEncryptCodes = _x getVariable ["BFT_groupMarker_encryptCodes", []];
+		{
+			if((_targetGroupsEncryptCodes find _x) > -1) then {
+				// The player has a decrypt code which matches an encrypt code
+				_canSeeOtherGroup = true;
+				break;
+			}		
+		} forEach _playersGroupDecryptCodes;
+		if(!_canSeeOtherGroup) then {continue;};
+
+	};
 
 	// Position
 	_markerPos = [_x] call FUNC(groupMarkers_getGroupPosition);
@@ -18,8 +36,33 @@
 	_marker = createMarkerLocal [groupId _x, _markerPos];
 	_marker setMarkerShapeLocal "ICON";
 	_marker setMarkerTypeLocal (_markerSide + "_" + _markerType);
-	_marker setMarkerTextLocal groupId _x;
+	_markerText = groupId _x;
+	if(side _x != (side group player)) then {
+		_markerText = _markerText + " (" + str (side _x) + ")";
+	};
+	_marker setMarkerTextLocal _markerText;
 	_marker setMarkerColorLocal _markerColor;
+
+	if(_x != group player) then {
+		// Don't care about showing cryption if is players group
+		_targetGroupsEncryptCodes = _x getVariable ["BFT_groupMarker_encryptCodes", []];
+		_targetGroupCryptCodes = (_targetGroupsEncryptCodes) + (_x getVariable ["BFT_groupMarker_decryptCodes", []]);
+		_targetCanSeeUs = false;
+		// todo: replace with arrayIntersect
+		{
+			if((_targetGroupCryptCodes find _x) > -1) then {
+				_targetCanSeeUs = true;
+				break;
+			}
+		} forEach (group player getVariable ["BFT_groupMarker_encryptCodes",[]]);
+		if(!_targetCanSeeUs) then {	
+			// visually indicate that the other group cannot see our marker
+			_marker setMarkerAlphaLocal 0.6;
+		} else {
+			_marker setMarkerAlphaLocal 1;
+		};
+
+	};
 
 	// Add marker to array 
 	BFT_GroupMarkers pushBack _marker;
