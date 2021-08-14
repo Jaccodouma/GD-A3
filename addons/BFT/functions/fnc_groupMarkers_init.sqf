@@ -11,6 +11,16 @@ if ((group player getVariable ["BFT_groupMarker_visible", objNull]) isEqualTo ob
 	group player setVariable ["BFT_groupMarker_visible", true, true];
 };
 
+// Encryption codes are used to 'encrypt' the group markers signal.
+if ((group player getVariable ["BFT_groupMarker_encryptCodes", objNull]) isEqualTo objNull) then {
+	group player setVariable ["BFT_groupMarker_encryptCodes", [str side group player], true];
+};
+// Decryption codes are used to 'decrypt' the group markers signal. 
+// To see a specific group marker, a group must have a decryption code which matches at least one of the specific groups encryption codes
+if ((group player getVariable ["BFT_groupMarker_decryptCodes", objNull]) isEqualTo objNull) then {
+	group player setVariable ["BFT_groupMarker_decryptCodes", [], true];
+};
+
 fnc_loop = {
 	// Remove old markers
 	[] call FUNC(groupMarkers_remove);
