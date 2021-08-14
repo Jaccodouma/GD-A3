@@ -6,4 +6,5 @@ keys/*
 .hemtt/local
 ####
 
+*.code-workspace
 addons/*.pbo
