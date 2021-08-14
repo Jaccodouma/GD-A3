@@ -22,9 +22,8 @@ _actions = [];
 	_color = _x; 
 	_name = getText (configfile >> "CfgMarkerColors" >> _color >> "name"); 
 
-	private _markerSide = "b"; 
-	if (playerSide == opfor) then {_markerSide = "o"};
-	if (playerSide == independent) then {_markerSide = "n"};
+	_markerSide = [group player] call FUNC(getGroupMarkerShape);
+	
 	_markerType = (group player) getVariable ["BFT_groupMarker_type", "inf"];
 
 	_interactIcon = getText (configfile >> "CfgMarkers" >> _markerSide + "_" + _markerType >> "icon"); 

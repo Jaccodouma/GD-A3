@@ -23,10 +23,7 @@ _actions = [];
 	_xor = (_isPreferred||_showPreferred)&&!(_isPreferred&&_showPreferred);
 	if (_xor) then {continue;};
 
-	// Get the marker side (to make "inf" into "b_inf" etc)
-	private _markerSide = "b"; 
-	if (playerSide == opfor) then {_markerSide = "o"};
-	if (playerSide == independent) then {_markerSide = "n"};
+	_markerSide = [group player] call FUNC(getGroupMarkerShape);
 
 	_icon = _x; 
 	_name = getText (configfile >> "CfgMarkers" >> _markerSide + "_" + _icon >> "Name"); 
