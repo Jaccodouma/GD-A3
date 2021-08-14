@@ -61,3 +61,8 @@ class CfgSettings {
   - Vehicle damage status easier to see
   - Can we stabilize the gun when vehicle turning? 
   - Keybinds for speed limiter (Try to use the ACE keybind maybe? Default is del, so ctrl+del = nearest speed lower than current, shift+del nearest speed higher than current)
+
+- Map (CoverMap) 
+  - Look into adding an improved "Cover Map" module, which covers the map and squares can be "Unlocked" by scripts
+    Maybe allow non square shapes if we find a way
+    https://community.bistudio.com/wiki/drawTriangle 
