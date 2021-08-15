@@ -48,6 +48,7 @@ class CfgSettings {
   - Add the options to 3DEN and Zeus
   - Add quick function for mission makers to set group vars
   - Add ability to disable BFT for groups (for mission makers). (Implement HT's networks idea)
+  - Larger group support (ie Alpha lead with Alpha 1,2,3 etc)
 
 - Player markers (BFT)
   - Clean up (separate functions mainly)
@@ -62,7 +63,9 @@ class CfgSettings {
   - Can we stabilize the gun when vehicle turning? 
   - Keybinds for speed limiter (Try to use the ACE keybind maybe? Default is del, so ctrl+del = nearest speed lower than current, shift+del nearest speed higher than current)
 
-- Map (CoverMap) 
+- Mission tools
+  - Some mission timeout thing? (Mission ends after x minutes, admins can add to it)
+  - Some tool that allows people to select certain gear during briefing (Briefing arsenal)
   - Look into adding an improved "Cover Map" module, which covers the map and squares can be "Unlocked" by scripts
     Maybe allow non square shapes if we find a way
     https://community.bistudio.com/wiki/drawTriangle 
