@@ -152,6 +152,15 @@ GVAR(availableMarkerColors) = [
 	["Default, ColorWEST, ColorEAST, ColorGUER, ColorCIV, Color1_FD_F, Color2_FD_F, Color3_FD_F, Color4_FD_F, Color5_FD_F, Color6_FD_F"]
 ] call CBA_fnc_addSetting;
 
+[
+	QGVAR(groupMarkers_fuzzOtherFactions),
+	"CHECKBOX",
+	["Enable obfuscation of other faction groups", "Groups of other sides/factions will show as default names/colours"],
+	["[TCA] BFT - Group markers", "Crypto settings"],
+	true
+] call CBA_fnc_addSetting; 
+
+
 /*
  ██    █████    ████████████    ███    ███ █████ ██████ ██   ███████████████ ███████ 
  ██    ██████   ████   ██       ████  ██████   ████   ████  ██ ██     ██   ████      

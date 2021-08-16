@@ -23,6 +23,8 @@ _playersGroupDecryptCodes = (group player getVariable ["BFT_groupMarker_decryptC
 
 	};
 
+	_sameSide = side _x == side (group player);
+
 	// Position
 	_markerPos = [_x] call FUNC(groupMarkers_getGroupPosition);
 
@@ -35,11 +37,17 @@ _playersGroupDecryptCodes = (group player getVariable ["BFT_groupMarker_decryptC
 	// Create marker
 	_marker = createMarkerLocal [groupId _x, _markerPos];
 	_marker setMarkerShapeLocal "ICON";
-	_marker setMarkerTypeLocal (_markerSide + "_" + _markerType);
+
 	_markerText = groupId _x;
-	if(side _x != (side group player)) then {
-		_markerText = _markerText + " (" + str (side _x) + ")";
+	
+	if(!_sameSide && GVAR(groupMarkers_fuzzOtherFactions)) then {
+		// if the group is a different side, then lets set that group to unknown text / default side colours. 
+		_markerType = "unknown";
+		_markerText = str (side _x);
+		_markerColor = [side _x, true] call BIS_fnc_sideColor;
 	};
+
+	_marker setMarkerTypeLocal (_markerSide + "_" + _markerType);
 	_marker setMarkerTextLocal _markerText;
 	_marker setMarkerColorLocal _markerColor;
 
