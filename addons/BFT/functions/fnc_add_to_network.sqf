@@ -10,17 +10,20 @@ To avoid transmission, use add_network_observor
 Example Usage:
 
 In a groups init field:
-[_this, "network-name"] call add_to_network
+[_this, "network-name"] call tca_bft_fnc_add_to_network
 
 
 */
 #include "script_component.hpp"
 
-params ["_unit","_netName"];
+params ["_group","_netName"];
 
+if(typeName _group != "GROUP") exitWith {
+	systemChat "add_to_network requires group as first parameter";
+};
 
-_currentCodes = (group _unit) getVariable ["BFT_groupMarker_encryptCodes", []];
+_currentCodes = (_group) getVariable ["BFT_groupMarker_encryptCodes", []];
 _currentCodes pushBackUnique _netName;
-_currentCodes = (group _unit) setVariable ["BFT_groupMarker_encryptCodes", _currentCodes, true];
+_currentCodes = (_group) setVariable ["BFT_groupMarker_encryptCodes", _currentCodes, true];
 
 _netName;

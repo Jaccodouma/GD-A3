@@ -12,3 +12,10 @@ PREP(groupMarkers_settings_insertColorsChildren);
 PREP(groupMarkers_settings_insertNameChildren);
 
 PREP(getGroupMarkerShape);
+
+PREP(add_to_network);
+PREP(remove_from_network);
+PREP(add_network_observer);
+PREP(remove_network_observer);
+PREP(clear_networks_observed);
+PREP(clear_networks);
