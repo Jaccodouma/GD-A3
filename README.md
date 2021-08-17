@@ -62,6 +62,7 @@ class CfgSettings {
   - Vehicle damage status easier to see
   - Can we stabilize the gun when vehicle turning? 
   - Keybinds for speed limiter (Try to use the ACE keybind maybe? Default is del, so ctrl+del = nearest speed lower than current, shift+del nearest speed higher than current)
+  - Maybe rework the ACE speed limiter. Right now it simply wont exceed the set speed, which makes no sense when going downhill for example. Maybe just ignore holding W whenever the speed is above the set speed? 
 
 - Mission tools
   - Some mission timeout thing? (Mission ends after x minutes, admins can add to it)
@@ -69,3 +70,7 @@ class CfgSettings {
   - Look into adding an improved "Cover Map" module, which covers the map and squares can be "Unlocked" by scripts
     Maybe allow non square shapes if we find a way
     https://community.bistudio.com/wiki/drawTriangle 
+
+Misc. 
+  - Dslyexci seems to have made a lot of private things for ShackTac, could replicate some
+      Like the heli tools (gunner compass, view on map?), seen in this video https://www.youtube.com/watch?v=gI-GJpCpza8 
