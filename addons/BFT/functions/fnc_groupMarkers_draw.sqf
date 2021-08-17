@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-_playersGroupDecryptCodes = (group player getVariable ["BFT_groupMarker_decryptCodes", []]) + (group player getVariable ["BFT_groupMarker_encryptCodes", []]);
+_playersGroupDecryptCodes = (group player getVariable ["BFT_groupMarker_decryptCodes", []]) + (group player getVariable ["BFT_groupMarker_encryptCodes", [str side group player]]);
 
 {
 	if !(_x getVariable ["BFT_groupMarker_visible", false]) then {continue;};
@@ -11,7 +11,7 @@ _playersGroupDecryptCodes = (group player getVariable ["BFT_groupMarker_decryptC
 		_canSeeOtherGroup = false;
 
 		// todo: replace with arrayIntersect
-		_targetGroupsEncryptCodes = _x getVariable ["BFT_groupMarker_encryptCodes", []];
+		_targetGroupsEncryptCodes = _x getVariable ["BFT_groupMarker_encryptCodes", [str side _x]];
 		{
 			if((_targetGroupsEncryptCodes find _x) > -1) then {
 				// The player has a decrypt code which matches an encrypt code
@@ -53,7 +53,7 @@ _playersGroupDecryptCodes = (group player getVariable ["BFT_groupMarker_decryptC
 
 	if(_x != group player) then {
 		// Don't care about showing cryption if is players group
-		_targetGroupsEncryptCodes = _x getVariable ["BFT_groupMarker_encryptCodes", []];
+		_targetGroupsEncryptCodes = _x getVariable ["BFT_groupMarker_encryptCodes", [str side _x]];
 		_targetGroupCryptCodes = (_targetGroupsEncryptCodes) + (_x getVariable ["BFT_groupMarker_decryptCodes", []]);
 		_targetCanSeeUs = false;
 		// todo: replace with arrayIntersect
@@ -62,7 +62,7 @@ _playersGroupDecryptCodes = (group player getVariable ["BFT_groupMarker_decryptC
 				_targetCanSeeUs = true;
 				break;
 			}
-		} forEach (group player getVariable ["BFT_groupMarker_encryptCodes",[]]);
+		} forEach (group player getVariable ["BFT_groupMarker_encryptCodes",[str side group player]]);
 		if(!_targetCanSeeUs) then {	
 			// visually indicate that the other group cannot see our marker
 			_marker setMarkerAlphaLocal 0.6;
