@@ -17,4 +17,4 @@ if(typeName _group != "GROUP") exitWith {
 	systemChat "add_to_network requires group as first parameter";
 };
 
-[(_group),"*"] call FUNC(fnc_remove_network_observer);
+[(_group),"*"] call FUNC(networks_removeObserver);

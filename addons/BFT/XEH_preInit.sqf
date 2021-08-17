@@ -47,7 +47,7 @@ GVAR(availableMarkerColors) = [
         params ["_value"];
 		if (_value) then {
 			// Enable markers
-			[] call FUNC(groupMarkers_init);
+			[] call FUNC(init);
 		};
 	}
 ] call CBA_fnc_addSetting; 

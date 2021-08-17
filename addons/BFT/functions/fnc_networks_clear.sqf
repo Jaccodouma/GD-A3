@@ -14,4 +14,4 @@ In a groups init field:
 params ["_group"];
 
 
-[(_group),"*"] call FUNC(fnc_remove_from_network);
+[(_group),"*"] call FUNC(networks_remove);

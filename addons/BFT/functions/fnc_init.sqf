@@ -13,13 +13,13 @@ if ((group player getVariable ["BFT_groupMarker_visible", objNull]) isEqualTo ob
 
 fnc_loop = {
 	// Remove old markers
-	[] call FUNC(groupMarkers_remove);
+	[] call FUNC(remove);
 
 	// Leave loop after removing markers
 	if !(GVAR(groupMarkers_enabled)) exitWith {};
 
 	// Create new markers 
-	[] call FUNC(groupMarkers_draw);
+	[] call FUNC(draw);
 
 	private _sleepTime = GVAR(groupMarkers_updateDelay);
 	if (isMultiplayer) then {
@@ -32,4 +32,4 @@ fnc_loop = {
 [] call fnc_loop;
 
 // Add settings to map 
-[] call FUNC(groupMarkers_addSettings);
+[] call FUNC(settings_add);

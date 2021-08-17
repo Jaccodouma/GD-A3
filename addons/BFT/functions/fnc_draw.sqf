@@ -26,7 +26,7 @@ _playersGroupDecryptCodes = (group player getVariable ["BFT_groupMarker_decryptC
 	_sameSide = side _x == side (group player);
 
 	// Position
-	_markerPos = [_x] call FUNC(groupMarkers_getGroupPosition);
+	_markerPos = [_x] call FUNC(getGroupPosition);
 
 	// Type & Color 
 	_markerType = _x getVariable ["BFT_groupMarker_type", "inf"];
