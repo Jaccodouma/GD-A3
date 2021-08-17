@@ -5,7 +5,7 @@ Some scripts to keep track of your teams. Requires DUI and ACE3.
 There's three variables used:
 - **BFT_groupMarker_visible**, obvious. 
 - **BFT_groupMarker_type**, can be one of: *air, antiair, armor, art, hq, inf, installation, maint, mech_inf, med, mortar, motor_inf, naval, ordinance, plane, recon, service, support, uav, unknown*.
-- **BFT_groupMarker_color**, found [here](https://community.bistudio.com/wiki/Arma_3:_CfgMarkerColors).
+- **BFT_groupMarker_color**, found [here](https://community.bistudio.com/wiki/Arma_3:_CfgMarkerColors). (Note: other mods can add to CfgMarkers, these will also be available and show up in the map interact menu)
 
 An example (in the init field of a group): 
 ```ts
