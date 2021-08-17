@@ -30,7 +30,7 @@ _playersGroupDecryptCodes = (group player getVariable ["BFT_groupMarker_decryptC
 
 	// Type & Color 
 	_markerType = _x getVariable ["BFT_groupMarker_type", "inf"];
-	_markerColor = _x getVariable ["BFT_groupMarker_color", [playerSide, true] call BIS_fnc_sideColor];
+	_markerColor = _x getVariable ["BFT_groupMarker_color", [side _x, true] call BIS_fnc_sideColor];
 
 	_markerSide = [_x] call FUNC(getGroupMarkerShape);
 
