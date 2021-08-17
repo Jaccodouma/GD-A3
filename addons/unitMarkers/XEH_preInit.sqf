@@ -21,7 +21,7 @@ ADDON = false;
         params ["_value"];
 		if (_value) then {
 			// Enable markers
-			[] call FUNC(unitMarkers_init);
+			[] call FUNC(init);
 		};
 	}
 ] call CBA_fnc_addSetting; 
