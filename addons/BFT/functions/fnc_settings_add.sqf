@@ -34,7 +34,7 @@ action_BFT_Colors = [
 	getText(configfile >> "TCA_BFT_Interact_Icons" >> "colorWheel"), 
 	{true}, 
 	{true}, // Condition
-	FUNC(groupMarkers_settings_insertColorsChildren), 
+	FUNC(settings_insertColorsChildren), 
 	[true] // Params to pass to insertChildren
 ] call ace_interact_menu_fnc_createAction;
 
@@ -47,7 +47,7 @@ _action_BFT_Colors_Other = [
 	getText(configfile >> "TCA_BFT_Interact_Icons" >> "plus"), 
 	{true}, 
 	{true}, // Condition
-	FUNC(groupMarkers_settings_insertColorsChildren)
+	FUNC(settings_insertColorsChildren)
 ] call ace_interact_menu_fnc_createAction;
 
 [player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors"], _action_BFT_Colors_Other] call ace_interact_menu_fnc_addActionToObject;
@@ -61,7 +61,7 @@ _action_BFT_Name = [
 	getText(configfile >> "TCA_BFT_Interact_Icons" >> "pen"), 
 	{true},
 	{true}, 
-	FUNC(groupMarkers_settings_insertNameChildren)
+	FUNC(settings_insertNameChildren)
 ] call ace_interact_menu_fnc_createAction;
 
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], _action_BFT_Name] call ace_interact_menu_fnc_addActionToObject;
@@ -74,7 +74,7 @@ _action_BFT_Icon = [
 	getText(configfile >> "TCA_BFT_Interact_Icons" >> "BFT"),
 	{true}, // Statement (breaks if not true for some reason)
 	{true}, // Condition
-	FUNC(groupMarkers_settings_insertIconsChildren), 
+	FUNC(settings_insertIconsChildren), 
 	[true] // Params to pass to insertChildren
 ] call ace_interact_menu_fnc_createAction;
 
@@ -86,7 +86,7 @@ _action_BFT_Icons_Other = [
 	getText(configfile >> "TCA_BFT_Interact_Icons" >> "plus"), 
 	{true}, // Statement (breaks if not true for some reason)
 	{true}, // Condition
-	FUNC(groupMarkers_settings_insertIconsChildren)
+	FUNC(settings_insertIconsChildren)
 ] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Icons"], _action_BFT_Icons_Other] call ace_interact_menu_fnc_addActionToObject;
 

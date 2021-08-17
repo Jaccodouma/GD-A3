@@ -1,21 +1,18 @@
-PREP(groupMarkers_init);
-PREP(groupMarkers_draw);
-PREP(groupMarkers_remove);
+PREP(init);
+PREP(draw);
+PREP(remove);
 
-PREP(groupMarkers_addSettings);
-PREP(groupMarkers_getGroupPosition);
-
-PREP(unitMarkers_init);
-
-PREP(groupMarkers_settings_insertIconsChildren);
-PREP(groupMarkers_settings_insertColorsChildren);
-PREP(groupMarkers_settings_insertNameChildren);
-
+PREP(getGroupPosition);
 PREP(getGroupMarkerShape);
 
-PREP(add_to_network);
-PREP(remove_from_network);
-PREP(add_network_observer);
-PREP(remove_network_observer);
-PREP(clear_networks_observed);
-PREP(clear_networks);
+PREP(settings_add);
+PREP(settings_insertIconsChildren);
+PREP(settings_insertColorsChildren);
+PREP(settings_insertNameChildren);
+
+PREP(networks_add);
+PREP(networks_remove);
+PREP(networks_clear);
+PREP(networks_addObserver);
+PREP(networks_removeObserver);
+PREP(networks_clearObserved);
