@@ -62,7 +62,7 @@ class CfgSettings {
   - Vehicle damage status easier to see
   - Can we stabilize the gun when vehicle turning? 
   - Keybinds for speed limiter (Try to use the ACE keybind maybe? Default is del, so ctrl+del = nearest speed lower than current, shift+del nearest speed higher than current)
-  - Maybe rework the ACE speed limiter. Right now it simply wont exceed the set speed, which makes no sense when going downhill for example. Maybe just ignore holding W whenever the speed is above the set speed? 
+  - Maybe rework the ACE speed limiter. Right now it simply wont exceed the set speed, which makes no sense when going downhill for example. Maybe just ignore holding W whenever the speed is above the set speed? See how this works once it's out of dev https://community.bistudio.com/wiki/setCruiseControl.
 
 - Mission tools
   - Some mission timeout thing? (Mission ends after x minutes, admins can add to it)
