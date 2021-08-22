@@ -49,11 +49,13 @@ class CfgSettings {
   - Add quick function for mission makers to set group vars
   - Add ability to disable BFT for groups (for mission makers). (Implement HT's networks idea)
   - Larger group support (ie Alpha lead with Alpha 1,2,3 etc)
+  - Allow mission makers to disable completely
 
 - Player markers (BFT)
   - Clean up (separate functions mainly)
   - Need GPS?
   - Change show hide marker thingy to have options "Off, Zeus only, On".
+  - Allow mission makers to disable completely
 
 - Troop overview (BFT)
   - A tab on the map with all teams/units
