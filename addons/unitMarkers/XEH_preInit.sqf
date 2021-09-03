@@ -16,14 +16,7 @@ ADDON = false;
 	"Mark other groups' units", 
 	"[TCA] Unit markers",
 	true, 
-	0, 
-	{
-        params ["_value"];
-		if (_value) then {
-			// Enable markers
-			[] call FUNC(init);
-		};
-	}
+	0
 ] call CBA_fnc_addSetting; 
 
 [
