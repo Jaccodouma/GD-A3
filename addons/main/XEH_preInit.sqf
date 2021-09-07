@@ -54,8 +54,17 @@ ADDON = false;
 	{}
 ] call CBA_fnc_addSetting; 
 
-
-
-
+[
+	QGVAR(LoadoutDiaryRecord_Enabled),
+	"CHECKBOX",
+	"Enable Loadout diary record", 
+	["[TCA] Miscellaneous", "Other"],
+	false, 
+	0, 
+	{
+		[] call FUNC(addLoadoutDiaryRecord);
+	}, 
+	true
+] call CBA_fnc_addSetting; 
 
 ADDON = true;
