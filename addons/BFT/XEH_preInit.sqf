@@ -46,6 +46,14 @@ GVAR(availableMarkerColors) = [
 ] call CBA_fnc_addSetting; 
 
 [
+	QGVAR(groupMarkers_defaultSetting),
+	"LIST",
+	["Auto enable for", "What groups will automatically have their BFT enabled."], 
+	"[TCA] BFT",
+	[[0, 1, 2], ["None", "Player", "All"],1]
+] call CBA_fnc_addSetting; 
+
+[
 	QGVAR(groupMarkers_updateDelay),
 	"SLIDER",
 	["Update delay", "Delay between group marker updates."], 
@@ -53,7 +61,6 @@ GVAR(availableMarkerColors) = [
 	[1, 60, 5, 0]
 ] call CBA_fnc_addSetting; 
 
-// Position
 [
 	QGVAR(groupMarkers_markerShape),
 	"LIST",

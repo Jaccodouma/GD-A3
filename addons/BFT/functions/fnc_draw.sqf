@@ -3,7 +3,7 @@
 _playersGroupDecryptCodes = (group player getVariable ["BFT_groupMarker_decryptCodes", []]) + (group player getVariable ["BFT_groupMarker_encryptCodes", [str side group player]]);
 
 {
-	if !(_x getVariable ["BFT_groupMarker_visible", false]) then {continue;};
+	if !(_x getVariable ["BFT_groupMarker_visible", (GVAR(groupMarkers_defaultSetting) == 2)]) then {continue;};
 	if (count units _x <= 0) then {continue;};
 
 	if(_x != group player) then {
