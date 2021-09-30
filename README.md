@@ -76,3 +76,4 @@ class CfgSettings {
 Misc. 
   - Dslyexci seems to have made a lot of private things for ShackTac, could replicate some
       Like the heli tools (gunner compass, view on map?), seen in this video https://www.youtube.com/watch?v=gI-GJpCpza8 
+  - mb move the hand comms thingy to a separate menu? Like opens a new ACE interact menu or smth
