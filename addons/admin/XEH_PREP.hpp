@@ -9,3 +9,4 @@ PREP(command_arsenal);
 PREP(command_teleport);
 PREP(command_zeus);
 PREP(command_respawn);
+PREP(command_respawnSend);

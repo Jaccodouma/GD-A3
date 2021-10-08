@@ -78,7 +78,8 @@ _fn_listPlayers = {
 	{
 		// Current result is saved in variable _x
 		_str = _str + format ["<br/><font color='%2'>%1</font> ", name _x, '#676767'];
-		_str = _str + format ["<execute expression='[] remoteExec [""%2"", %1]'>[Respawn]</execute> ", 	owner _x, QFUNC(command_respawn)];
+		// _str = _str + format ["<execute expression='[] remoteExec [""%2"", %1]'>[Respawn]</execute> ", 	owner _x, QFUNC(command_respawn)];
+		_str = _str + format ["<execute expression='[""%1""] call %2'>[Respawn]</execute> ",getPlayerUID _x, QFUNC(command_respawnSend)];
 	} forEach _deadPlayers;
 
 	_str
