@@ -20,9 +20,11 @@ _disableSpeedLimiterAction = [
 	"Disable",
 	getText(configfile >> "TCA_BFT_Interact_Icons" >> "off"),
 	{
-		[player, vehicle player] call ace_vehicles_fnc_speedLimiter;
+		vehicle player setCruiseControl [0, false];
 	},
-	{missionNameSpace getVariable ["ace_vehicles_isSpeedLimiter", false]}
+	{
+		(getCruiseControl vehicle player)#0 != 0; 
+	}
 ] call ace_interact_menu_fnc_createAction;
 
 _actions pushBack [_disableSpeedLimiterAction, [], _target];
@@ -31,13 +33,13 @@ _actions pushBack [_disableSpeedLimiterAction, [], _target];
 	_speed = _x#0;
 
 	// Continue if already set at this speed.
-	if (ace_vehicles_speedlimit == _speed && ace_vehicles_isSpeedLimiter) then {continue;};
+	if ((getCruiseControl vehicle player)#0 == _speed) then {continue;};
 
 	_name = format ["%1 (%2)", _x#1, _x#0];
 	_icon = "";
 	_statement = {
 		params ["_target", "_player", "_speed"];
-		[_speed] call FUNC(waitAndLimitSpeed);
+		(vehicle player) setCruiseControl [_speed, false];
 	};
 	_params = _speed;
 
