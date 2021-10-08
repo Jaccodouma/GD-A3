@@ -1,62 +1,40 @@
-// Add zeus to local player
+#include "script_component.hpp"
 
-systemChat "Adding zeus!";
-
-_this = [name player];
-
+// Largely looked copied this: 
 // https://gist.github.com/dedmen/3fa5f648631dd14a4173edea7580045e
 
-missionNamespace setVariable [_this select 0,player, true];
-[0, {
-	params ["_myName"];
-	private _curVarName = _myName+"Cur";
-	
-	if (!isNil _curVarName) then {
-		[-1, compile format["if (player == %1) then {%1 sideChat 'deleting Curator';}", _myName]] call CBA_fnc_globalExecute;
-		deleteVehicle (missionNamespace getVariable [_curVarName, objNull]);
-		missionNamespace setVariable [_curVarName, nil, true];
-	};
+if (!isServer) exitWith {
+	systemChat format ["%1 needs to be executed on the server.", QFUNC(command_zeus)];
+}; 
+
+params ["_UID"]; 
+_target = [_UID] call BIS_fnc_getUnitByUID;
+
+// Delete old zeus
+// TODO: 
+
+// Create new zeus 
+systemChat "Creating Zeus..."; 
+
+// Create group 
+if (isNil QGVAR(CuratorGroup)) then {
+	GVAR(CuratorGroup) = createGroup sideLogic; 
+};
+
+// Create curator object
+_curObj = GVAR(CuratorGroup) createUnit ["ModuleCurator_F", [0,0,0], [], 0, "CAN_COLLIDE"];
+_curObj setVariable ["showNotification", false]; 
+
+// Set vars etc
+missionNameSpace setVariable [format ["%1_%2", QGVAR(curator), name _target], _curObj, true];
+publicVariable QGVAR(CuratorGroup); 
+unassignCurator _curObj; 
+
+// Assign all things ? (For now just assume zeus enh)
 
 
-	if (isNil _curVarName) then {
-		[-1, compile format["if (player == %1) then {%1 sideChat 'creating Curator';}", _myName]] call CBA_fnc_globalExecute;
+// Finalize
+_curObj setcuratorcoef["place", 0];
+_curObj setcuratorcoef["delete", 0];
 
-		if (isNil "DedmenCur_group") then {DedmenCur_group = creategroup sideLogic;};
-		private _myCurObject = DedmenCur_group createunit["ModuleCurator_F", [0, 90, 90], [], 0.5, "NONE"];	//Logic Server
-		_myCurObject setVariable ["showNotification",false];
-		
-		missionNamespace setVariable [_curVarName, _myCurObject, true];
-		publicVariable "DedmenCur_group";
-		unassignCurator _myCurObject;
-		_cfg = (configFile >> "CfgPatches");
-		_newAddons = [];
-		for "_i" from 0 to((count _cfg) - 1) do {
-			_name = configName(_cfg select _i);
-			_newAddons pushBack _name;
-		};
-		if (count _newAddons > 0) then {_myCurObject addCuratorAddons _newAddons};
-
-		_myCurObject setcuratorcoef["place", 0];
-		_myCurObject setcuratorcoef["delete", 0];
-		private _enableSyncVar = _myName+"_enableSync";
-		private _val = random 500;
-		missionNamespace setVariable [_enableSyncVar, random 500];
-		[_enableSyncVar,_val] spawn {
-			while  {(missionNamespace getVariable [_this select 0, 0]) == (_this select 1)} do {
-			// {
-			_myCurObject addCuratorEditableObjects[(allMissionObjects "All"), true];
-			// } forEach allCurators;
-			sleep 2;
-		};};
-		
-
-	};
-	private _myCurObject = missionNamespace getVariable [_curVarName, objNull];
-	
-	/* if (getAssignedCuratorUnit (_myCurObject) != dedmen) then {*/
-	unassignCurator _myCurObject;
-	sleep 0.4;
-	player assignCurator _myCurObject;
-	/* };*/
-	[-1, compile format["if (player == %1) then {%1 sideChat 'you are Curator';}", _myName]] call CBA_fnc_globalExecute;
-}, _this] call CBA_fnc_globalExecute;
+_target assignCurator _curObj;

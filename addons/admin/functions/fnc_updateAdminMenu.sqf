@@ -1,7 +1,5 @@
 #include "script_component.hpp"
 
-systemChat "Reloading admin menu..";
-
 // Make sure admin menu subject exists 
 GVAR(adminMenuSubject) = player createDiarySubject ["Admin", "Admin"];
 if (missionNamespace getVariable [QGVAR(adminmenuRecord), ""] isEqualTo "") then {
@@ -50,9 +48,11 @@ _fn_playerColor = {
 _fn_listPlayers = {
 	_str = ""; 
 
+	_deadPlayers = []; 
+
 	{
 		// Add group header 
-		_str = _str + format ["<font size='16' face='PuristaBold'>%1</font>", groupId _x];
+		_str = _str + format ["<br/><font size='16' face='PuristaBold'>%1</font>", groupId _x];
 
 		{
 			if (!isPlayer _x) then {continue;};
@@ -62,24 +62,35 @@ _fn_listPlayers = {
 			_str = _str + format ["<execute expression='[""%1""] call %2'>[Heal]</execute> ", 	getPlayerUID _x, QFUNC(command_heal)];
 			_str = _str + format ["<execute expression='[""%1""] call %2'>[TP]</execute> ", 	getPlayerUID _x, QFUNC(command_teleport)];
 			_str = _str + format ["<execute expression='[""%1""] call %2'>[Medi]</execute> ", 	getPlayerUID _x, QFUNC(command_makeMedic)];
-			_str = _str + format ["<execute expression='[""%1""] call %2'>[Engi]</execute> ", 	getPlayerUID _x, QFUNC(command_makeMedic)];
+			_str = _str + format ["<execute expression='[""%1""] call %2'>[Engi]</execute> ", 	getPlayerUID _x, QFUNC(command_makeEngineer)];
 			_str = _str + format ["<execute expression='[""%1""] call %2'>[Arsenal]</execute> ",getPlayerUID _x, QFUNC(command_arsenal)];
+			_str = _str + "<br/>";
 		} forEach units _x;
 	} forEach (call _fn_groupsWithPlayers);
+
+	// Dead units 
+	_str = _str + "<br/><font size='16' face='PuristaBold'>Dead ones</font>";
+	{
+		// Current result is saved in variable _x
+		_str = _str + format ["<br/><font color='%2'>%1</font> ", name _x, '#676767'];
+		_str = _str + format ["<execute expression='[] remoteExec [%2, %1]'>[Respawn]</execute> ", 	owner _x, QFUNC(command_respawn)];
+	} forEach _deadPlayers;
 
 	_str
 };
 
 
 // Compile list
+// <br/><execute expression='[] call %3'>[Add Zeus]</execute>
 _text = format ["
 <font size='20' face='PuristaBold'>Admin menu </font><execute expression='[] call %2;'>[Reload]</execute>
-<br/><execute expression='[] call %3'>[Add Zeus]</execute>
+<br/><execute expression='[""%4""] remoteExec [""%3"", 2]'>[Add Zeus]</execute>
 <br/><font size='20' face='PuristaBold'>Players</font>
-<br/>%1",
+%1",
 call _fn_listPlayers, 
 QFUNC(updateAdminMenu), 
-QFUNC(command_zeus)
+QFUNC(command_zeus), 
+getPlayerUID player
 ];
 
 player setDiaryRecordText [
