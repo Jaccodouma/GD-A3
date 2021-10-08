@@ -57,6 +57,11 @@ _fn_listPlayers = {
 		{
 			if (!isPlayer _x) then {continue;};
 
+			if (!alive _x) then {
+				_deadPlayers pushBack _x; 
+				continue; 
+			};
+
 			// Add unit text
 			_str = _str + format ["<br/><font color='%2'>%1</font> ", name _x, [_x] call _fn_playerColor];
 			_str = _str + format ["<execute expression='[""%1""] call %2'>[Heal]</execute> ", 	getPlayerUID _x, QFUNC(command_heal)];
@@ -73,7 +78,7 @@ _fn_listPlayers = {
 	{
 		// Current result is saved in variable _x
 		_str = _str + format ["<br/><font color='%2'>%1</font> ", name _x, '#676767'];
-		_str = _str + format ["<execute expression='[] remoteExec [%2, %1]'>[Respawn]</execute> ", 	owner _x, QFUNC(command_respawn)];
+		_str = _str + format ["<execute expression='[] remoteExec [""%2"", %1]'>[Respawn]</execute> ", 	owner _x, QFUNC(command_respawn)];
 	} forEach _deadPlayers;
 
 	_str
