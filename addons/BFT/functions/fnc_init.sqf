@@ -5,7 +5,7 @@
 
 // Global variable for all group markers 
 BFT_GroupMarkers = [];
-
+ 
 // Set enabled variable for player group if not set yet 
 if ((group player getVariable ["BFT_groupMarker_visible", objNull]) isEqualTo objNull && GVAR(groupMarkers_defaultSetting) > 0) then {
 	group player setVariable ["BFT_groupMarker_visible", true, true];
